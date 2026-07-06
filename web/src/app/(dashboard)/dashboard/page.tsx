@@ -13,7 +13,6 @@ import {
 export default async function DashboardPage() {
   const session = await getSession();
 
-  // Fetch assessment counts and latest record for this user
   let assessmentCount = 0;
   let latestAssessment = null;
 
