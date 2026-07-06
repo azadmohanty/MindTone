@@ -93,6 +93,7 @@ export async function POST(request: NextRequest) {
           all_tabular_predictions: { Normal: 10, Depression: 45, Anxiety: 45 },
           risk_flags: { sleep_disturbance: "Yes", high_tension: gad >= 10 ? "Yes" : "No" },
         },
+        pdf_report_name: "Mental_Health_Report_Fallback.pdf"
       };
     }
 
@@ -179,6 +180,7 @@ export async function POST(request: NextRequest) {
         
         allTabularPredictions: JSON.stringify(mlResponse.final_prediction.all_tabular_predictions),
         riskFlags: JSON.stringify(mlResponse.final_prediction.risk_flags),
+        pdfReportName: mlResponse.pdf_report_name || null,
       },
     });
 

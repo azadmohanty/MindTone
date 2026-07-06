@@ -111,6 +111,11 @@ async def predict_audio(file: UploadFile = File(...)):
             os.remove(temp_path)
 
 
+from src.config.paths import JSON_OUTPUT
+from src.fusion.fusion import FusionEngine
+from src.report.graphs import main as generate_graphs
+from src.report.generate_report import main as generate_report
+
 @app.post("/predict/multimodal")
 async def predict_multimodal(
     questionnaire: str = Form(..., description="JSON stringified questionnaire payload"),
@@ -137,13 +142,28 @@ async def predict_multimodal(
         tab_res = predict_tabular_data(q_data)
         aud_res = predict_audio_data(temp_path)
 
-        # Compute fusion decision
-        fused_res = fuse_results(tab_res, aud_res)
+        # Write predictions to disk so FusionEngine and Report Generators can process them
+        os.makedirs(str(JSON_OUTPUT), exist_ok=True)
+        with open(str(JSON_OUTPUT / "tabular_prediction.json"), "w") as f:
+            json.dump(tab_res, f, indent=4)
+        with open(str(JSON_OUTPUT / "audio_prediction.json"), "w") as f:
+            json.dump(aud_res, f, indent=4)
+
+        # Execute and save fusion prediction
+        fusion = FusionEngine()
+        fusion.save()
+
+        # Generate on-demand plots
+        generate_graphs()
+
+        # Compile PDF report
+        pdf_report_name = generate_report()
 
         return {
             "tabular_prediction": tab_res,
             "audio_prediction": aud_res,
-            "final_prediction": fused_res
+            "final_prediction": fusion.fuse(),
+            "pdf_report_name": pdf_report_name
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Multimodal prediction engine failed: {str(e)}")

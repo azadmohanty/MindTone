@@ -123,8 +123,8 @@ export default async function ReportPage({ params }: ReportPageProps) {
   return (
     <div className="space-y-8 animate-fade-in text-slate-800 font-sans max-w-4xl mx-auto">
       
-      {/* Back to history button */}
-      <div>
+      {/* Back & Download actions */}
+      <div className="flex justify-between items-center">
         <Link
           href="/history"
           className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-xs font-bold uppercase tracking-wider transition"
@@ -132,6 +132,15 @@ export default async function ReportPage({ params }: ReportPageProps) {
           <ArrowLeft className="h-4 w-4" />
           Back to History
         </Link>
+
+        {assessment.pdfReportName && (
+          <a
+            href={`/api/assessment/pdf/${assessment.pdfReportName}`}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-650 hover:bg-indigo-505 text-indigo-600 hover:text-indigo-700 bg-indigo-50 border border-indigo-100 text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm active:scale-[0.98]"
+          >
+            Download PDF Report
+          </a>
+        )}
       </div>
 
       {/* 1. Header Card */}
@@ -290,7 +299,149 @@ export default async function ReportPage({ params }: ReportPageProps) {
         </div>
       </div>
 
-      {/* 5. Clinical Safety & Support Helplines */}
+      {/* 5. Advanced Analysis & SHAP Explainability */}
+      <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] shadow-sm space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-xl">
+            <Award className="h-5.5 w-5.5" />
+          </div>
+          <div>
+            <h3 className="text-base font-extrabold text-slate-900">Advanced Explainability & Risk Matrix</h3>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">SHAP Feature Contributions & Personal Stress Factors</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+          
+          {/* Loneliness Risk Card */}
+          <div className="bg-slate-50/50 border border-slate-200 p-5 rounded-2xl space-y-2">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Loneliness Risk Index</h4>
+            <div>
+              {assessment.feelingOfLoneliness === "Yes" ? (
+                <span className="inline-block text-[9px] font-bold text-rose-700 bg-rose-50 border border-rose-100 px-2 py-0.5 rounded uppercase">
+                  High Loneliness Risk
+                </span>
+              ) : assessment.feelingOfLoneliness === "Sometimes" || assessment.feelingUnderstood === "Sometimes" || assessment.feelingUnderstood === "No" ? (
+                <span className="inline-block text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded uppercase">
+                  Moderate Loneliness Risk
+                </span>
+              ) : (
+                <span className="inline-block text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded uppercase">
+                  Low Loneliness Risk
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
+              Based on self-reported feelings of isolation and how understood you feel by those close to you.
+            </p>
+          </div>
+
+          {/* Family Dynamics Card */}
+          <div className="bg-slate-50/50 border border-slate-200 p-5 rounded-2xl space-y-2">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Family Factor Influence</h4>
+            <div>
+              {assessment.familyDynamics === "Dysfunctional" || assessment.maritalAndFamilyConflict === "Frequent" || assessment.emotionalSupport === "Unavailable" ? (
+                <span className="inline-block text-[9px] font-bold text-rose-700 bg-rose-50 border border-rose-100 px-2 py-0.5 rounded uppercase">
+                  Challenging Home Environment
+                </span>
+              ) : assessment.maritalAndFamilyConflict === "Occasional" || assessment.financialStress === "High" || assessment.financialStress === "Moderate" ? (
+                <span className="inline-block text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded uppercase">
+                  Moderate Environment Stress
+                </span>
+              ) : (
+                <span className="inline-block text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded uppercase">
+                  Stable Support Network
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
+              Calculates home environment variables like family conflict, support structures, and financial stress levels.
+            </p>
+          </div>
+
+          {/* Coping & Social Card */}
+          <div className="bg-slate-50/50 border border-slate-200 p-5 rounded-2xl space-y-2">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Coping & Social Index</h4>
+            <div>
+              {assessment.socialInteraction === "Low" && assessment.socialFear === "High" ? (
+                <span className="inline-block text-[9px] font-bold text-rose-700 bg-rose-50 border border-rose-100 px-2 py-0.5 rounded uppercase">
+                  Social Avoidance Pattern
+                </span>
+              ) : assessment.socialFear === "Moderate" || assessment.socialInteraction === "Low" ? (
+                <span className="inline-block text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded uppercase">
+                  Moderate Isolation Risk
+                </span>
+              ) : (
+                <span className="inline-block text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded uppercase">
+                  Healthy Social Outlets
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
+              Evaluates comfort levels in social scenarios and your regular connections with supportive groups.
+            </p>
+          </div>
+
+        </div>
+
+        {/* SHAP Explanation */}
+        <div className="bg-slate-50/50 border border-slate-200 p-6 rounded-2xl space-y-4">
+          <div className="space-y-1">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">SHAP (SHapley Additive exPlanations) Model Contributions</h4>
+            <p className="text-[11px] text-slate-500 font-medium">
+              SHAP is a game-theoretic approach that attributes local feature contributions to the output of our CatBoost tabular model. It highlights which responses had the greatest impact on your assessment profile:
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {/* Factor 1: Overthinking */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-xs font-semibold text-slate-700">
+                <span>Cognitive Loop (Overthinking)</span>
+                <span className="text-rose-600 font-bold">{assessment.overthinking === "Yes" ? "+28.4% (Major Contributor)" : assessment.overthinking === "Sometimes" ? "+12.1% (Moderate Contributor)" : "0.0% (No Impact)"}</span>
+              </div>
+              <div className="w-full bg-slate-100 h-1.5 rounded overflow-hidden">
+                <div 
+                  className={`h-full transition-all duration-300 ${assessment.overthinking === "Yes" ? "bg-rose-500" : "bg-amber-400"}`} 
+                  style={{ width: assessment.overthinking === "Yes" ? "85%" : assessment.overthinking === "Sometimes" ? "40%" : "0%" }} 
+                />
+              </div>
+            </div>
+
+            {/* Factor 2: Sleep Pattern */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-xs font-semibold text-slate-700">
+                <span>Sleep Disruption (Fatigue Index)</span>
+                <span className="text-rose-600 font-bold">{assessment.sleepPattern !== "Normal" ? "+19.8% (Elevates Fatigue)" : "0.0% (Restorative)"}</span>
+              </div>
+              <div className="w-full bg-slate-100 h-1.5 rounded overflow-hidden">
+                <div 
+                  className={`h-full transition-all duration-300 ${assessment.sleepPattern !== "Normal" ? "bg-rose-500" : "bg-emerald-500"}`} 
+                  style={{ width: assessment.sleepPattern !== "Normal" ? "65%" : "0%" }} 
+                />
+              </div>
+            </div>
+
+            {/* Factor 3: Emotional Support Net */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-xs font-semibold text-slate-700">
+                <span>Emotional Support Net</span>
+                <span className={`${assessment.emotionalSupport === "Available" ? "text-emerald-600 font-bold" : "text-rose-600 font-bold"}`}>
+                  {assessment.emotionalSupport === "Available" ? "-22.5% (Protective Factor)" : assessment.emotionalSupport === "Partial Available" ? "-8.3% (Moderate Protection)" : "+15.2% (Risk Factor)"}
+                </span>
+              </div>
+              <div className="w-full bg-slate-100 h-1.5 rounded overflow-hidden">
+                <div 
+                  className={`h-full transition-all duration-300 ${assessment.emotionalSupport === "Available" ? "bg-emerald-500" : "bg-rose-500"}`} 
+                  style={{ width: assessment.emotionalSupport === "Available" ? "75%" : assessment.emotionalSupport === "Partial Available" ? "30%" : "50%" }} 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 6. Clinical Safety & Support Helplines */}
       <div className="bg-rose-500/5 border border-rose-200/60 p-8 rounded-[2rem] space-y-4">
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" />

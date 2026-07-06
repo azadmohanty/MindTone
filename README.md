@@ -36,18 +36,70 @@ MentalHealth_ML/
 ├── dataset/             # Datasets used for model training
 ├── history/             # Assessment history local CSV database (for CLI)
 ├── models/              # Pickled models and category encoders
-├── outputs/             # Static PDF reports and graphs outputs (for CLI)
+├── outputs/             # Static PDF reports and graphs outputs
 ├── src/
 │   ├── api/             # FastAPI App Server (server.py)
 │   ├── audio/           # Feature extraction & audio classification model
 │   ├── config/          # Global target columns and file paths configuration
+│   ├── explainability/  # SHAP explainability & feature attribution analyses
 │   ├── fusion/          # FusionEngine decision algorithms
 │   ├── history/         # CLI history logger and cleanup utilities
+│   ├── report/          # ReportLab PDF compiler & matplotlib graphs scripts
 │   └── tabular/         # Tabular preprocessing & CatBoost regressor models
 ├── scratch/             # Persistent scratch verification scripts
+├── web/                 # Next.js Web App Isolation Directory
+│   ├── prisma/          # Prisma ORM Schema & SQLite dev.db file
+│   ├── public/          # Static assets & user-recorded audio files
+│   ├── src/             # Next.js App Router codebase
+│   │   ├── app/         # Pages, Layouts, and API routes
+│   │   ├── components/  # Reusable React components (Sidebar, AudioRecorder)
+│   │   └── lib/         # Prisma client, sessions, cookies, JWT encryption
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
 ├── main.py              # CLI batch execution entrypoint
 └── requirements.txt     # Python package requirements
 ```
+
+---
+
+## 💾 Database & Local Storage
+
+The user accounts, profile details, and wellness check-in records are stored in a relational **SQLite** database managed by **Prisma ORM**.
+
+### 1. Database File Location
+The database is saved locally at:
+`web/prisma/dev.db`
+
+### 2. How to Access the Database Locally
+You can view, search, and edit database records in two ways:
+
+* **Interactive GUI (Prisma Studio)**:
+  Run this command inside the `web/` directory to launch a clean graphical database editor in your browser:
+  ```bash
+  npx prisma studio
+  ```
+  It will open automatically at [http://localhost:5555](http://localhost:5555).
+
+* **Direct SQLite Access**:
+  Since `dev.db` is a standard SQLite database file, you can open it with any local database tool such as:
+  * **DB Browser for SQLite** (https://sqlitebrowser.org/)
+  * **DBeaver** or **DataGrip**
+  * **VS Code SQLite Viewer** extension
+
+---
+
+## 📊 SHAP Explainability & PDF Reports
+
+### 1. SHAP (SHapley Additive exPlanations)
+To provide explainable AI (XAI) for mental health classifications, the framework incorporates SHAP values. SHAP models feature attribution as a cooperative game, calculating the exact positive or negative push that user inputs (such as overthinking levels or sleep patterns) exert on their anxiety and depression scores.
+
+### 2. On-Demand PDF Report Compilation
+When a survey is submitted via the web app:
+1. The Next.js endpoint forwards payload inputs to the FastAPI engine.
+2. The engine generates ML classification predictions.
+3. The engine dynamically calls `src/report/graphs.py` to compile visualization charts (probabilities bar graph and risk flags tracker) under `outputs/graphs/`.
+4. The engine executes `src/report/generate_report.py` to compile a print-ready ReportLab PDF document under `outputs/reports/`.
+5. The generated PDF file is securely served via the Next.js `/api/assessment/pdf/[pdfName]` download stream.
 
 ---
 
