@@ -289,20 +289,20 @@ export default function SurveyPage() {
   const progressPct = Math.round(((currentStep - 1) / 8) * 100);
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
+    <div className="w-full max-w-2xl mx-auto space-y-6 text-slate-200">
       
       {/* Step Header */}
-      <div className="flex justify-between items-center bg-slate-900 border border-slate-800 px-6 py-4 rounded-2xl">
+      <div className="flex justify-between items-center bg-[#161a22] border border-slate-800 px-6 py-4 rounded-2xl">
         <div>
-          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">Step {currentStep} of 9</span>
+          <span className="text-[10px] font-bold text-[#8fbc8f] uppercase tracking-wider">Step {currentStep} of 9</span>
           <h2 className="text-sm font-extrabold text-white uppercase tracking-tight">Clinical Assessment Survey</h2>
         </div>
-        <div className="w-24 bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
-          <div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
+        <div className="w-24 bg-[#0e1115] h-2 rounded overflow-hidden border border-slate-800/80">
+          <div className="bg-[#5b7a61] h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
         </div>
       </div>
 
-      <div className="bg-slate-900/60 border border-slate-800/80 shadow-2xl rounded-[2rem] p-6 sm:p-10 backdrop-blur-xl transition-all">
+      <div className="bg-[#161a22] border border-slate-800 shadow-xl rounded-2xl p-6 sm:p-10 relative">
         {errorMsg && (
           <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 p-4 rounded-xl text-xs font-semibold mb-6 animate-pulse">
             {errorMsg}
@@ -318,8 +318,8 @@ export default function SurveyPage() {
         {currentStep === 1 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 1: Demographics</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Tell us about yourself</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 1: Demographics</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Tell us about yourself</h2>
               <p className="text-xs text-slate-400">Provide registration inputs to connect with your clinical record.</p>
             </div>
             <div className="space-y-4">
@@ -330,7 +330,7 @@ export default function SurveyPage() {
                   value={formData.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-sm text-white"
+                  className="w-full px-4 py-3 bg-[#0e1115] border border-slate-800 rounded-xl focus:border-[#5b7a61] focus:ring-1 focus:ring-[#5b7a61]/20 focus:outline-none text-sm text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -340,7 +340,7 @@ export default function SurveyPage() {
                   value={formData.mobile}
                   onChange={(e) => updateField("mobile", e.target.value)}
                   placeholder="Enter your mobile number"
-                  className="w-full px-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-sm text-white"
+                  className="w-full px-4 py-3 bg-[#0e1115] border border-slate-800 rounded-xl focus:border-[#5b7a61] focus:ring-1 focus:ring-[#5b7a61]/20 focus:outline-none text-sm text-white"
                 />
               </div>
             </div>
@@ -351,8 +351,8 @@ export default function SurveyPage() {
         {currentStep === 2 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 2: Cognitive Profile</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Emotional & Cognitive Profile</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 2: Cognitive Profile</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Emotional & Cognitive Profile</h2>
             </div>
             <div className="space-y-5">
               {/* Mood swings */}
@@ -364,7 +364,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("moodChanges", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.moodChanges === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.moodChanges === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -373,10 +373,10 @@ export default function SurveyPage() {
               </div>
 
               {/* Optimism level slider */}
-              <div className="space-y-2 p-4 bg-slate-950/60 rounded-2xl border border-slate-800/80">
+              <div className="space-y-2 p-4 bg-[#0e1115] rounded-xl border border-slate-800">
                 <div className="flex justify-between text-xs font-semibold">
                   <span className="text-slate-300 uppercase tracking-wider">Optimism Level (1 to 10)</span>
-                  <span className="text-indigo-400 font-bold">{formData.optimismLevel}</span>
+                  <span className="text-[#8fbc8f] font-bold">{formData.optimismLevel}</span>
                 </div>
                 <input
                   type="range"
@@ -384,7 +384,7 @@ export default function SurveyPage() {
                   max="10"
                   value={formData.optimismLevel}
                   onChange={(e) => updateField("optimismLevel", parseInt(e.target.value, 10))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                  className="w-full h-1.5 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-[#5b7a61]"
                 />
               </div>
 
@@ -397,7 +397,7 @@ export default function SurveyPage() {
                       key={emotion}
                       type="button"
                       onClick={() => updateField("currentEmotionalState", emotion)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.currentEmotionalState === emotion ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.currentEmotionalState === emotion ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {emotion}
                     </button>
@@ -414,7 +414,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("overthinking", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.overthinking === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.overthinking === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -431,7 +431,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("socialFear", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialFear === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialFear === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -440,10 +440,10 @@ export default function SurveyPage() {
               </div>
 
               {/* Concentration Level */}
-              <div className="space-y-2 p-4 bg-slate-950/60 rounded-2xl border border-slate-800/80">
+              <div className="space-y-2 p-4 bg-[#0e1115] rounded-xl border border-slate-800">
                 <div className="flex justify-between text-xs font-semibold">
                   <span className="text-slate-300 uppercase tracking-wider">Concentration Ability (1 to 10)</span>
-                  <span className="text-indigo-400 font-bold">{formData.concentration}</span>
+                  <span className="text-[#8fbc8f] font-bold">{formData.concentration}</span>
                 </div>
                 <input
                   type="range"
@@ -451,7 +451,7 @@ export default function SurveyPage() {
                   max="10"
                   value={formData.concentration}
                   onChange={(e) => updateField("concentration", parseInt(e.target.value, 10))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                  className="w-full h-1.5 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-[#5b7a61]"
                 />
               </div>
 
@@ -464,7 +464,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("socialInteraction", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialInteraction === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialInteraction === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -479,8 +479,8 @@ export default function SurveyPage() {
         {currentStep === 3 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 3: Context Profile</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Sleep patterns & Trauma History</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 3: Context Profile</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Sleep patterns & Trauma History</h2>
             </div>
             <div className="space-y-5">
               {/* Sleep Pattern */}
@@ -492,7 +492,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("sleepPattern", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.sleepPattern === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.sleepPattern === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -509,7 +509,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("reducedNeedForSleep", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.reducedNeedForSleep === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.reducedNeedForSleep === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -526,7 +526,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("increasedEnergyLevel", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.increasedEnergyLevel === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.increasedEnergyLevel === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -543,7 +543,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("pastTrauma", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.pastTrauma === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.pastTrauma === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -560,7 +560,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("intrusiveMemories", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.intrusiveMemories === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.intrusiveMemories === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -577,7 +577,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("avoidanceBehaviour", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.avoidanceBehaviour === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.avoidanceBehaviour === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -592,8 +592,8 @@ export default function SurveyPage() {
         {currentStep === 4 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 4: Family Dynamics</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Family Context & Environment</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 4: Family Dynamics</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Family Context & Environment</h2>
             </div>
             <div className="space-y-5">
               {/* Family Structure */}
@@ -605,7 +605,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("familyStructure", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyStructure === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyStructure === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -622,7 +622,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("familyDynamics", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyDynamics === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyDynamics === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -639,7 +639,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("maritalAndFamilyConflict", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.maritalAndFamilyConflict === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.maritalAndFamilyConflict === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -656,7 +656,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("financialStress", opt)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.financialStress === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.financialStress === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -673,7 +673,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("emotionalSupport", opt)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.emotionalSupport === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.emotionalSupport === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -688,8 +688,8 @@ export default function SurveyPage() {
         {currentStep === 5 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 5: Self-Perception</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Social Isolation & Connection</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 5: Self-Perception</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Social Isolation & Connection</h2>
             </div>
             <div className="space-y-5">
               {/* Feeling of Loneliness */}
@@ -701,7 +701,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("feelingOfLoneliness", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingOfLoneliness === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingOfLoneliness === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -718,7 +718,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("feelingUnderstood", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingUnderstood === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingUnderstood === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -733,8 +733,8 @@ export default function SurveyPage() {
         {currentStep === 6 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 6: Health screening</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Safety Screening & Clinical Baseline</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 6: Health screening</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Safety Screening & Clinical Baseline</h2>
               <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
             <div className="space-y-5">
@@ -747,7 +747,7 @@ export default function SurveyPage() {
                       key={opt}
                       type="button"
                       onClick={() => updateField("suicidalThoughts", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.suicidalThoughts === opt ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.suicidalThoughts === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                     >
                       {opt}
                     </button>
@@ -764,8 +764,8 @@ export default function SurveyPage() {
               ].map((item) => {
                 const val = (formData as any)[item.key];
                 return (
-                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40">
-                    <label className="block text-xs font-semibold text-slate-300">{item.label}</label>
+                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 animate-fade-in">
+                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -777,7 +777,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                         >
                           {choice.text}
                         </button>
@@ -794,8 +794,8 @@ export default function SurveyPage() {
         {currentStep === 7 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 7: Extended Depression Module</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Depression Diagnostic screening</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 7: Extended Depression Module</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Depression Diagnostic screening</h2>
               <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
             <div className="space-y-5">
@@ -811,7 +811,7 @@ export default function SurveyPage() {
                 const val = (formData as any)[item.key];
                 return (
                   <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 first:border-0">
-                    <label className="block text-xs font-semibold text-slate-300">{item.label}</label>
+                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -823,7 +823,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                         >
                           {choice.text}
                         </button>
@@ -840,8 +840,8 @@ export default function SurveyPage() {
         {currentStep === 8 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 8: Extended Anxiety Module</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Anxiety Diagnostic screening</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 8: Extended Anxiety Module</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Anxiety Diagnostic screening</h2>
               <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
             <div className="space-y-5">
@@ -855,7 +855,7 @@ export default function SurveyPage() {
                 const val = (formData as any)[item.key];
                 return (
                   <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 first:border-0">
-                    <label className="block text-xs font-semibold text-slate-300">{item.label}</label>
+                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -867,7 +867,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-indigo-600 border-indigo-500 text-white" : "bg-slate-950 border-slate-800 text-slate-400 hover:border-indigo-500"}`}
+                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
                         >
                           {choice.text}
                         </button>
@@ -884,8 +884,8 @@ export default function SurveyPage() {
         {currentStep === 9 && (
           <section className="space-y-6">
             <div className="space-y-2 text-center">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Section 9: Multimodal Verification</span>
-              <h2 className="text-2xl font-extrabold tracking-tight text-white">Conversational Voice Recording</h2>
+              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 9: Multimodal Verification</span>
+              <h2 className="text-2xl font-bold tracking-tight text-white">Conversational Voice Recording</h2>
             </div>
             
             <div className="py-2">
@@ -899,7 +899,7 @@ export default function SurveyPage() {
           <button
             onClick={handleBack}
             disabled={currentStep === 1 || loading}
-            className={`px-5 py-2.5 bg-slate-850 text-slate-300 hover:bg-slate-800 border border-slate-800 text-sm font-semibold rounded-xl transition active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed ${currentStep === 1 ? "invisible" : ""}`}
+            className={`px-5 py-2.5 bg-slate-800 text-slate-200 hover:bg-slate-750 text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed ${currentStep === 1 ? "invisible" : ""}`}
           >
             Back
           </button>
@@ -907,10 +907,10 @@ export default function SurveyPage() {
           <button
             onClick={handleNext}
             disabled={!isStepValid() || loading}
-            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl transition shadow-md shadow-indigo-600/10 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+            className="px-6 py-2.5 bg-[#5b7a61] hover:bg-[#4b6651] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
           >
             {loading ? (
-              <div className="w-5.5 h-5.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : currentStep === 9 ? (
               "Submit Assessment"
             ) : (
