@@ -58,13 +58,13 @@ export default function RegisterPage() {
         {/* Header Block */}
         <div className="text-center space-y-2 mb-8">
           <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded border border-indigo-100">
-            Create Account
+            Join Us
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight pt-2">
-            Get Started
+            Create Your Account
           </h2>
           <p className="text-sm text-slate-500 font-medium">
-            Create an account to begin assessments.
+            Create an account to start your wellness checks.
           </p>
         </div>
 
@@ -85,13 +85,13 @@ export default function RegisterPage() {
           {/* Full Name Input */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-700">
-              Full Name <span className="text-indigo-500">*</span>
+              Name <span className="text-indigo-500">*</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your full name"
+              placeholder="Enter your name"
               required
               className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none transition duration-200 text-sm font-medium text-slate-800"
             />
@@ -100,7 +100,7 @@ export default function RegisterPage() {
           {/* Email Input */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-700">
-              Email Address <span className="text-indigo-500">*</span>
+              Email <span className="text-indigo-500">*</span>
             </label>
             <input
               type="email"

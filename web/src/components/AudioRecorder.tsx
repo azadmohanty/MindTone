@@ -190,11 +190,11 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
     <div className="p-6 bg-white border border-slate-200/80 rounded-2xl space-y-4 max-w-md mx-auto text-center shadow-sm">
       <div className="flex flex-col items-center space-y-2">
         <span className="text-[10px] font-bold text-indigo-650 uppercase tracking-widest bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-100">
-          Acoustic Voice Module
+          Voice Reflection
         </span>
-        <h3 className="text-base font-bold text-slate-800 uppercase tracking-tight">Speech Sample Analysis</h3>
+        <h3 className="text-base font-bold text-slate-800 uppercase tracking-tight">Record your thoughts</h3>
         <p className="text-[11px] text-slate-500 max-w-[280px] leading-relaxed font-medium">
-          Describe how you are feeling today out loud. Record for at least 3-5 seconds.
+          In your own words, tell us briefly how you are feeling today. Record for at least 3-5 seconds.
         </p>
       </div>
 
@@ -242,7 +242,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              RECORDING COMPILED
+              Voice recorded successfully
             </span>
             <audio src={audioUrl} controls className="h-8 max-w-full accent-indigo-650 rounded-lg" />
           </div>
@@ -256,7 +256,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
             onClick={startRecording}
             className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition duration-150 active:scale-[0.97] shadow-sm"
           >
-            Start Audio Capturing
+            Start Recording
           </button>
         )}
 
@@ -274,7 +274,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
             onClick={resetRecording}
             className="px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold uppercase tracking-wider rounded-xl transition duration-150 border border-slate-200 active:scale-[0.97]"
           >
-            Re-Record Voice
+            Record Again
           </button>
         )}
       </div>

@@ -187,7 +187,7 @@ export default function SurveyPage() {
   // Submit survey payload to Next.js API endpoint (Integration hook)
   const submitSurvey = async () => {
     if (!audioBlob) {
-      setErrorMsg("Please complete the voice verification recording first.");
+      setErrorMsg("Please complete the voice reflection first.");
       return;
     }
 
@@ -276,12 +276,12 @@ export default function SurveyPage() {
         throw new Error(result.error || "Failed to submit assessment.");
       }
 
-      setSuccessMsg("Assessment processed! Redirecting to report...");
+      setSuccessMsg("Wellness details saved! Loading your review...");
       setTimeout(() => {
         router.push(`/dashboard/report/${result.assessmentId}`);
       }, 2000);
     } catch (err: any) {
-      setErrorMsg(err.message || "An unexpected error occurred during transmission.");
+      setErrorMsg(err.message || "An unexpected error occurred. Please try again.");
       setLoading(false);
     }
   };
@@ -295,7 +295,7 @@ export default function SurveyPage() {
       <div className="flex justify-between items-center bg-white border border-slate-200/80 px-6 py-4 rounded-2xl shadow-sm">
         <div>
           <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">Step {currentStep} of 9</span>
-          <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Clinical Assessment Survey</h2>
+          <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Wellness Check-in</h2>
         </div>
         <div className="w-24 bg-slate-100 h-2 rounded overflow-hidden border border-slate-200">
           <div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
@@ -314,13 +314,13 @@ export default function SurveyPage() {
           </div>
         )}
 
-        {/* STEP 1: Demographics */}
+        {/* STEP 1: Basic Information */}
         {currentStep === 1 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 1: Demographics</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Tell us about yourself</h2>
-              <p className="text-sm text-slate-500">Provide name and contact details to proceed with the clinical survey.</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 1: Basic Information</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Let's get started</h2>
+              <p className="text-sm text-slate-500">Please share your name so we know how to address you.</p>
             </div>
             <div className="space-y-4 pt-4 border-t border-slate-100">
               <div className="space-y-2">
@@ -347,17 +347,17 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 2: Emotional & Cognitive */}
+        {/* STEP 2: Mood & Feelings */}
         {currentStep === 2 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 2: Cognitive Profile</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Emotional & Cognitive Profile</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 2: Mood & Feelings</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">How have you been feeling?</h2>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Mood swings */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you frequently experience sudden changes in mood? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you feel like your mood shifts suddenly? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -378,7 +378,7 @@ export default function SurveyPage() {
               {/* Optimism level slider */}
               <div className="space-y-3 p-5 bg-slate-50 border border-slate-200/50 rounded-3xl">
                 <div className="flex justify-between items-center text-sm font-semibold">
-                  <span className="text-slate-750">Optimism Level (1 to 10)</span>
+                  <span className="text-slate-750">How hopeful do you feel about the future? (1 to 10)</span>
                   <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded text-xs">{formData.optimismLevel}</span>
                 </div>
                 <input
@@ -393,7 +393,7 @@ export default function SurveyPage() {
 
               {/* Current emotion state */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Which emotion best describes how you usually feel? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Which of these describes how you usually feel? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                   {["Anger", "Fear", "Happy", "Neutral", "Sad"].map((emotion) => (
                     <button
@@ -410,7 +410,7 @@ export default function SurveyPage() {
 
               {/* Overthinking */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you frequently overthink or repeatedly worry about situations? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you find yourself overthinking or worrying? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
@@ -430,19 +430,23 @@ export default function SurveyPage() {
 
               {/* Social Fear */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">How often do you feel nervous or fearful in social situations? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">How comfortable do you feel around other people? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
-                  {["High", "Moderate", "Low"].map((opt) => (
+                  {[
+                    { label: "Comfortable", val: "Low" },
+                    { label: "Somewhat uneasy", val: "Moderate" },
+                    { label: "Anxious", val: "High" }
+                  ].map((opt) => (
                     <button
-                      key={opt}
+                      key={opt.val}
                       type="button"
-                      onClick={() => updateField("socialFear", opt)}
-                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialFear === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
+                      onClick={() => updateField("socialFear", opt.val)}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialFear === opt.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
-                        {formData.socialFear === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                        {formData.socialFear === opt.val && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
                       </div>
-                      {opt}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -451,7 +455,7 @@ export default function SurveyPage() {
               {/* Concentration Level */}
               <div className="space-y-3 p-5 bg-slate-50 border border-slate-200/50 rounded-3xl">
                 <div className="flex justify-between items-center text-sm font-semibold">
-                  <span className="text-slate-750">Concentration Ability (1 to 10)</span>
+                  <span className="text-slate-750">How easy is it for you to focus? (1 to 10)</span>
                   <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded text-xs">{formData.concentration}</span>
                 </div>
                 <input
@@ -466,19 +470,23 @@ export default function SurveyPage() {
 
               {/* Social interaction */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">How would you describe your level of social interaction? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">How often do you connect with others? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
-                  {["High", "Moderate", "Low"].map((opt) => (
+                  {[
+                    { label: "Often", val: "High" },
+                    { label: "Sometimes", val: "Moderate" },
+                    { label: "Rarely", val: "Low" }
+                  ].map((opt) => (
                     <button
-                      key={opt}
+                      key={opt.val}
                       type="button"
-                      onClick={() => updateField("socialInteraction", opt)}
-                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialInteraction === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
+                      onClick={() => updateField("socialInteraction", opt.val)}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialInteraction === opt.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
-                        {formData.socialInteraction === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                        {formData.socialInteraction === opt.val && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
                       </div>
-                      {opt}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -487,17 +495,17 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 3: Sleep & Trauma */}
+        {/* STEP 3: Sleep & Personal Experiences */}
         {currentStep === 3 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 3: Context Profile</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Sleep patterns & Trauma History</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 3: Sleep & Personal Experiences</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Sleep & Personal Experiences</h2>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Sleep Pattern */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Sleep pattern during the past month? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">How has your sleep been this past month? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Normal", "Reduced", "Excessive"].map((opt) => (
                     <button
@@ -517,7 +525,7 @@ export default function SurveyPage() {
 
               {/* Reduced sleep need */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you feel energetic despite sleeping very little? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you ever feel highly energetic even if you sleep very little? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -537,7 +545,7 @@ export default function SurveyPage() {
 
               {/* Increased energy */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">An unusual increase in energy level or activity? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Have you noticed any unusual bursts of energy or activity? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -557,7 +565,7 @@ export default function SurveyPage() {
 
               {/* Past Trauma */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Have you experienced any past trauma? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Have you experienced any challenging or overwhelming events in the past? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -577,7 +585,7 @@ export default function SurveyPage() {
 
               {/* Intrusive memories */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you experience intrusive memories or flashbacks? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you experience unexpected memories or flashbacks of these events? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -597,7 +605,7 @@ export default function SurveyPage() {
 
               {/* Avoidance behavior */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you actively avoid thoughts/places connected to trauma? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you find yourself avoiding thoughts or places that remind you of them? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -618,17 +626,17 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 4: Family Environment */}
+        {/* STEP 4: Family & Home Environment */}
         {currentStep === 4 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 4: Family Dynamics</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Family Context & Environment</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 4: Family & Home Environment</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Your Home & Support Network</h2>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Family Structure */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Family Structure <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Household Type <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Joint", "Nuclear", "Other"].map((opt) => (
                     <button
@@ -648,19 +656,23 @@ export default function SurveyPage() {
 
               {/* Family Dynamics */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Family Dynamics <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">How supportive is your household? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
-                  {["Supportive", "Neutral", "Dysfunctional"].map((opt) => (
+                  {[
+                    { label: "Supportive", val: "Supportive" },
+                    { label: "Neutral", val: "Neutral" },
+                    { label: "Challenging", val: "Dysfunctional" }
+                  ].map((opt) => (
                     <button
-                      key={opt}
+                      key={opt.val}
                       type="button"
-                      onClick={() => updateField("familyDynamics", opt)}
-                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.familyDynamics === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
+                      onClick={() => updateField("familyDynamics", opt.val)}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.familyDynamics === opt.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
-                        {formData.familyDynamics === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                        {formData.familyDynamics === opt.val && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
                       </div>
-                      {opt}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -668,7 +680,7 @@ export default function SurveyPage() {
 
               {/* Marital & Family conflict */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Marital & Family Conflict <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Is there conflict at home? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["No", "Occasional", "Frequent"].map((opt) => (
                     <button
@@ -688,7 +700,7 @@ export default function SurveyPage() {
 
               {/* Financial Stress */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Financial Stress <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">How much does financial stress affect you? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-4 gap-1.5">
                   {["Low", "Medium", "Moderate", "High"].map((opt) => (
                     <button
@@ -705,19 +717,23 @@ export default function SurveyPage() {
 
               {/* Emotional Support */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Emotional Support Availability <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you have someone you can talk to when you need support? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
-                  {["Available", "Partial Available", "Unavailable"].map((opt) => (
+                  {[
+                    { label: "Yes, fully", val: "Available" },
+                    { label: "Sometimes", val: "Partial Available" },
+                    { label: "Not really", val: "Unavailable" }
+                  ].map((opt) => (
                     <button
-                      key={opt}
+                      key={opt.val}
                       type="button"
-                      onClick={() => updateField("emotionalSupport", opt)}
-                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.emotionalSupport === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
+                      onClick={() => updateField("emotionalSupport", opt.val)}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.emotionalSupport === opt.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
-                        {formData.emotionalSupport === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                        {formData.emotionalSupport === opt.val && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
                       </div>
-                      {opt}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -726,17 +742,17 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 5: Self-Perception */}
+        {/* STEP 5: Connection & Loneliness */}
         {currentStep === 5 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 5: Self-Perception</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Social Isolation & Connection</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 5: Connection & Loneliness</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">How connected do you feel?</h2>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Feeling of Loneliness */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you feel a sense of loneliness? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you ever feel lonely? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
@@ -756,7 +772,7 @@ export default function SurveyPage() {
 
               {/* Feeling Understood */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Do you feel understood by people close to you? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Do you feel understood by the people around you? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
@@ -777,18 +793,18 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 6: Safety & Tier 1 Screening */}
+        {/* STEP 6: Daily Wellbeing */}
         {currentStep === 6 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 6: Health screening</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Safety Screening & Clinical Baseline</h2>
-              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 6: Daily Wellbeing</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">How you've been feeling recently</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you experienced these?</p>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Suicidal thoughts */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">Thoughts that you would be better off dead or hurting yourself? <span className="text-indigo-500">*</span></label>
+                <label className="block text-sm font-semibold text-slate-700">Thoughts that you would be better off dead or of hurting yourself? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
@@ -841,13 +857,13 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 7: Tier 2 Extended PHQ */}
+        {/* STEP 7: Additional Feelings Check */}
         {currentStep === 7 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 7: Extended Depression Module</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Depression Diagnostic screening</h2>
-              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 7: Additional Feelings Check</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">A closer look at your mood</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you experienced these?</p>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {[
@@ -887,13 +903,13 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 8: Tier 2 Extended GAD */}
+        {/* STEP 8: Additional Anxiety Check */}
         {currentStep === 8 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 8: Extended Anxiety Module</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Anxiety Diagnostic screening</h2>
-              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 8: Additional Anxiety Check</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">A closer look at your worries</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you experienced these?</p>
             </div>
             <div className="space-y-5 pt-4 border-t border-slate-100">
               {[
@@ -931,12 +947,12 @@ export default function SurveyPage() {
           </section>
         )}
 
-        {/* STEP 9: Audio Verification & Submission */}
+        {/* STEP 9: Voice Reflection & Submission */}
         {currentStep === 9 && (
           <section className="space-y-6">
             <div className="space-y-2 text-center">
-              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 9: Multimodal Verification</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Conversational Voice Recording</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 9: Voice Reflection</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Share a voice reflection</h2>
             </div>
             
             <div className="py-2">
@@ -963,7 +979,7 @@ export default function SurveyPage() {
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : currentStep === 9 ? (
-              "Submit Assessment"
+              "Submit Check-in"
             ) : (
               "Next Step"
             )}

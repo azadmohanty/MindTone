@@ -30,9 +30,9 @@ export default function Sidebar({ session }: SidebarProps) {
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard, role: "USER" },
-    { name: "Take Survey", href: "/survey", icon: ClipboardList, role: "USER" },
-    { name: "History", href: "/history", icon: History, role: "USER" },
-    { name: "Admin Portal", href: "/admin", icon: ShieldAlert, role: "ADMIN" },
+    { name: "Wellness Check-in", href: "/survey", icon: ClipboardList, role: "USER" },
+    { name: "My History", href: "/history", icon: History, role: "USER" },
+    { name: "Clinician Panel", href: "/admin", icon: ShieldAlert, role: "ADMIN" },
   ];
 
   const handleLogout = async () => {

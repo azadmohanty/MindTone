@@ -46,13 +46,13 @@ export default function LoginPage() {
         {/* Header Block */}
         <div className="text-center space-y-2 mb-8">
           <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded border border-indigo-100">
-            Secure Portal
+            Account Access
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight pt-2">
             Welcome Back
           </h2>
           <p className="text-sm text-slate-500 font-medium">
-            Sign in to access your assessment dashboard.
+            Sign in to view your mental health check-ins and reports.
           </p>
         </div>
 
@@ -68,13 +68,13 @@ export default function LoginPage() {
           {/* Email Input */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-slate-700">
-              Email Address <span className="text-indigo-500">*</span>
+              Email <span className="text-indigo-500">*</span>
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
+              placeholder="Enter your email"
               required
               className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none transition duration-200 text-sm font-medium text-slate-800"
             />

@@ -37,13 +37,13 @@ export default async function DashboardPage() {
       <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] shadow-sm relative">
         <div className="space-y-2 relative z-10">
           <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded border border-indigo-100">
-            Overview Panel
+            My Dashboard
           </span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight pt-2">
             Hello, {session?.name || "User"}
           </h1>
           <p className="text-sm text-slate-500 max-w-lg leading-relaxed font-medium">
-            Access your clinically-backed questionnaire analytics, review voice analysis reports, or record a new screening today.
+            Take a moment to check in on your mental wellbeing. You can fill out questionnaire checks, review past reports, or start a new check-in today.
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default async function DashboardPage() {
             <ClipboardList className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Completed Reports</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Wellness Checks Done</p>
             <h3 className="text-xl font-extrabold text-slate-900 mt-0.5">{assessmentCount}</h3>
           </div>
         </div>
@@ -68,9 +68,9 @@ export default async function DashboardPage() {
             <Activity className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Latest Diagnosis</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Recent Check-in Status</p>
             <h3 className="text-xs font-bold text-slate-900 mt-1.5 truncate max-w-[165px]">
-              {latestAssessment ? latestAssessment.finalDisorder : "No reports yet"}
+              {latestAssessment ? latestAssessment.finalDisorder : "No check-ins yet"}
             </h3>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
             <Calendar className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Assessment</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Checked</p>
             <h3 className="text-xs font-bold text-slate-900 mt-1.5">
               {latestAssessment ? latestAssessment.date.toDateString() : "Never"}
             </h3>
@@ -96,22 +96,22 @@ export default async function DashboardPage() {
         {/* Column 1: Call to Action */}
         <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] flex flex-col justify-between space-y-6 shadow-sm">
           <div className="space-y-3">
-            <h3 className="text-lg font-extrabold text-slate-900">Record New Screening</h3>
+            <h3 className="text-lg font-extrabold text-slate-900">Start a Wellness Check-in</h3>
             <p className="text-xs text-slate-500 leading-relaxed font-medium">
-              Take a comprehensive mental health assessment. Our dual questionnaire and speech classification engine will evaluate clinical flags in real-time.
+              Answer a few simple questions about your mood, sleep, and feelings, then record a short voice reflection to check in on how you are feeling today.
             </p>
           </div>
           <Link
             href="/survey"
             className="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center transition active:scale-[0.98] shadow-md shadow-indigo-600/10"
           >
-            Start Assessment
+            Begin Check-in
           </Link>
         </div>
 
         {/* Column 2: Quick History Preview */}
         <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] space-y-6 shadow-sm">
-          <h3 className="text-lg font-extrabold text-slate-900">Recent Record Preview</h3>
+          <h3 className="text-lg font-extrabold text-slate-900">Your Latest Results</h3>
           
           {latestAssessment ? (
             <div className="bg-slate-50/50 border border-slate-200 p-5 rounded-xl space-y-3">
@@ -122,7 +122,7 @@ export default async function DashboardPage() {
                 </span>
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Condition Assessment</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Assessment Result</p>
                 <p className="text-sm font-bold text-slate-950 mt-0.5">{latestAssessment.finalDisorder}</p>
               </div>
               <div className="flex gap-4 pt-1 text-xs text-slate-500">
@@ -133,7 +133,7 @@ export default async function DashboardPage() {
           ) : (
             <div className="h-32 flex flex-col items-center justify-center text-center text-slate-400 border border-dashed border-slate-200 rounded-xl p-4">
               <AlertCircle className="h-7 w-7 text-slate-300 mb-2" />
-              <p className="text-xs font-semibold">No diagnostic history available.</p>
+              <p className="text-xs font-semibold">No check-in history available yet.</p>
             </div>
           )}
 
@@ -141,7 +141,7 @@ export default async function DashboardPage() {
             href="/history"
             className="block text-center text-xs font-bold text-indigo-600 hover:text-indigo-500 transition"
           >
-            View Full Assessment History →
+            View My Full History →
           </Link>
         </div>
 
