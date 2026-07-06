@@ -6,10 +6,26 @@ interface AudioRecorderProps {
   onRecordingComplete: (blob: Blob | null) => void;
 }
 
+const PROMPTS = [
+  {
+    title: "1. A Happy Memory",
+    text: "Describe a peaceful place or a recent happy memory that made you smile."
+  },
+  {
+    title: "2. Your Week",
+    text: "How have your energy and sleep been this past week? Have you spent time connecting with others?"
+  },
+  {
+    title: "3. Right Now",
+    text: "Describe what you see in the room around you right now, or what your plans are for later today."
+  }
+];
+
 export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProps) {
   const [status, setStatus] = useState<"idle" | "recording" | "completed">("idle");
   const [recordingTime, setRecordingTime] = useState(0);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [activePrompt, setActivePrompt] = useState(0);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -19,6 +35,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
   // Timer Tick
   useEffect(() => {
@@ -121,6 +138,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
   const startRecording = async () => {
     setErrorMsg("");
     setRecordingTime(0);
+    setActivePrompt(0);
     audioChunksRef.current = [];
     cleanupMediaStream();
 
@@ -157,7 +175,7 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
       setTimeout(() => startCanvasVisualization(stream), 100);
     } catch (err: any) {
       console.error("Microphone permission denied:", err);
-      setErrorMsg("Microphone permission denied. Please allow microphone access.");
+      setErrorMsg("Microphone permission denied. Please allow microphone access in your browser settings.");
     }
   };
 
@@ -173,12 +191,19 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
     setStatus("idle");
     setRecordingTime(0);
     setAudioUrl(null);
+    setActivePrompt(0);
     onRecordingComplete(null);
     stopCanvasVisualization();
     cleanupMediaStream();
   };
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const nextPrompt = () => {
+    if (activePrompt < PROMPTS.length - 1) {
+      setActivePrompt((prev) => prev + 1);
+    } else {
+      stopRecording();
+    }
+  };
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -187,15 +212,14 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
   };
 
   return (
-    <div className="p-6 bg-white border border-slate-200/80 rounded-2xl space-y-4 max-w-md mx-auto text-center shadow-sm">
+    <div className="p-6 bg-white border border-slate-200/80 rounded-[2rem] space-y-5 max-w-md mx-auto text-center shadow-sm">
+      
+      {/* 1. Header Area */}
       <div className="flex flex-col items-center space-y-2">
         <span className="text-[10px] font-bold text-indigo-650 uppercase tracking-widest bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-100">
           Voice Reflection
         </span>
         <h3 className="text-base font-bold text-slate-800 uppercase tracking-tight">Record your thoughts</h3>
-        <p className="text-[11px] text-slate-500 max-w-[280px] leading-relaxed font-medium">
-          In your own words, tell us briefly how you are feeling today. Record for at least 3-5 seconds.
-        </p>
       </div>
 
       {errorMsg && (
@@ -204,7 +228,36 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
         </div>
       )}
 
-      {/* Visual State Board */}
+      {/* 2. Interactive Prompts Deck (Visible during recording or idle) */}
+      <div className="bg-slate-50/70 border border-slate-200/60 p-5 rounded-2xl min-h-[96px] flex flex-col justify-center items-center">
+        {status === "recording" ? (
+          <div className="space-y-2 animate-fade-in">
+            <span className="text-[9px] font-bold text-indigo-500 uppercase tracking-wider">
+              Prompt {activePrompt + 1} of {PROMPTS.length}
+            </span>
+            <h4 className="text-xs font-bold text-slate-800">{PROMPTS[activePrompt].title}</h4>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              {PROMPTS[activePrompt].text}
+            </p>
+          </div>
+        ) : status === "completed" ? (
+          <div className="space-y-1 text-slate-500">
+            <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider flex items-center justify-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Reflection Complete
+            </span>
+            <p className="text-[11px]">Your voice sample has been recorded successfully.</p>
+          </div>
+        ) : (
+          <p className="text-xs text-slate-500 max-w-[280px] leading-relaxed font-medium">
+            We will guide you with 3 gentle prompts. Click "Start Recording" when you are ready to speak.
+          </p>
+        )}
+      </div>
+
+      {/* 3. Visual State Board & Canvas */}
       <div className="relative h-24 bg-slate-50 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
         {status === "idle" && (
           <div className="text-slate-400 flex flex-col items-center space-y-1">
@@ -237,19 +290,13 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
         )}
 
         {status === "completed" && audioUrl && (
-          <div className="p-3 w-full flex items-center justify-center flex-col space-y-2">
-            <span className="text-[10px] font-bold text-indigo-600 flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Voice recorded successfully
-            </span>
+          <div className="p-3 w-full flex items-center justify-center">
             <audio src={audioUrl} controls className="h-8 max-w-full accent-indigo-650 rounded-lg" />
           </div>
         )}
       </div>
 
-      {/* Button Controls */}
+      {/* 4. Carousel Control Buttons */}
       <div className="flex justify-center items-center gap-3">
         {status === "idle" && (
           <button
@@ -261,12 +308,20 @@ export default function AudioRecorder({ onRecordingComplete }: AudioRecorderProp
         )}
 
         {status === "recording" && (
-          <button
-            onClick={stopRecording}
-            className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition duration-150 active:scale-[0.97]"
-          >
-            Stop Recording
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={nextPrompt}
+              className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition duration-150 active:scale-[0.97]"
+            >
+              {activePrompt < PROMPTS.length - 1 ? "Next Prompt" : "Finish Recording"}
+            </button>
+            <button
+              onClick={stopRecording}
+              className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition duration-150 active:scale-[0.97]"
+            >
+              Stop & Save
+            </button>
+          </div>
         )}
 
         {status === "completed" && (
