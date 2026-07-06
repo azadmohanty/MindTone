@@ -1,0 +1,12 @@
+catboost
+scikit-learn
+pandas
+numpy
+librosa
+praat-parselmouth
+matplotlib
+reportlab
+joblib
+fastapi
+uvicorn[standard]
+python-multipart

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# CatBoost Metadata
+catboost_info/
+
+# Node/Next.js
+node_modules/
+.next/
+out/
+build/
+.next-env.d.ts
+
+# OS & IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Databases & Local Logs
+*.db
+*.db-journal
+*.sqlite
+outputs/reports/Mental_Health_Report_*.pdf
+outputs/graphs/*.png
+outputs/json/*.json
+outputs/logs/*.log
+history/assessment_history.csv
+input/questionnaire.csv
+input/audio.wav
+mock_audio*.wav
+silent_audio*.wav
