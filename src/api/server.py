@@ -11,7 +11,7 @@ from src.audio.predict import predict_audio_data
 from src.fusion.fusion import fuse_results
 
 app = FastAPI(
-    title="MentalHealth_ML API Server",
+    title="MindTone API Server",
     description="Stateless Multimodal Mental Health Assessment API Engine",
     version="1.0.0"
 )
@@ -74,7 +74,7 @@ class QuestionnaireInput(BaseModel):
 def read_root():
     return {
         "status": "online",
-        "framework": "MentalHealth_ML",
+        "framework": "MindTone",
         "version": "1.0.0"
     }
 

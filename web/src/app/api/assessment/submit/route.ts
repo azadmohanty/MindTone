@@ -112,6 +112,37 @@ export async function POST(request: NextRequest) {
     fs.writeFileSync(audioFilePath, fileBuffer);
     const audioUrl = `/uploads/audio/${audioFilename}`;
 
+    // Safe mapping of ML Response keys (supporting both the Python FastAPI server responses and Next.js mock fallbacks)
+    const audioPred = mlResponse.audio_prediction || {};
+    const audioFeatures = audioPred["Audio Features"] || audioPred.features || {};
+    const predictionObj = audioPred["Prediction"] || {};
+
+    const pitchVal = parseFloat(audioFeatures["Pitch"] ?? audioFeatures.pitch ?? 0);
+    const pitchVarVal = parseFloat(audioFeatures["Pitch Variability"] ?? audioFeatures.pitch_variability ?? 0);
+    const speechRateVal = parseFloat(audioFeatures["Speech Rate"] ?? audioFeatures.speech_rate ?? 0);
+    const pauseDurVal = parseFloat(audioFeatures["Pause Duration"] ?? audioFeatures.pause_duration ?? 0);
+    const voiceEnergyVal = parseFloat(audioFeatures["Voice Energy"] ?? audioFeatures.voice_energy ?? 0);
+    const jitterVal = parseFloat(audioFeatures["Jitter"] ?? audioFeatures.jitter ?? 0);
+    const shimmerVal = parseFloat(audioFeatures["Shimmer"] ?? audioFeatures.shimmer ?? 0);
+    const hnrVal = parseFloat(audioFeatures["HNR"] ?? audioFeatures.hnr ?? 0);
+
+    const audioDisorderVal = typeof predictionObj === "string" ? predictionObj : (predictionObj["Predicted Disorder"] ?? audioPred.prediction ?? "Normal");
+    const audioConfidenceVal = parseFloat(predictionObj["Confidence"] ?? audioPred.confidence ?? 0);
+
+    const tabularPred = mlResponse.tabular_prediction || {};
+    const top3 = tabularPred.top3_disorders || [];
+    const tabularDisorderVal = tabularPred.prediction || (top3[0]?.disorder) || "Normal";
+
+    const finalPred = mlResponse.final_prediction || {};
+    const finalDisorderVal = finalPred["Final Disorder"] || finalPred.final_disorder || "Normal";
+    const decisionVal = finalPred["Decision"] || finalPred.decision || "Standard Clinical Protocol";
+
+    const riskFlagsObj = finalPred["Risk Flags"] || finalPred.risk_flags || {};
+    const riskFlagsVal = JSON.stringify(riskFlagsObj);
+
+    const allTabularPredictionsObj = finalPred.all_tabular_predictions || finalPred["Top 3 Disorders"] || tabularPred.all_disorders || {};
+    const allTabularPredictionsVal = JSON.stringify(allTabularPredictionsObj);
+
     // 4. Save assessment log to the SQLite Database via Prisma
     const record = await prisma.assessment.create({
       data: {
@@ -162,24 +193,24 @@ export async function POST(request: NextRequest) {
         gad7_7: parseInt(questionnaire["GAD7_7"] || 0, 10),
 
         // Speech acoustic indicators
-        pitch: parseFloat(mlResponse.audio_prediction.features.pitch || 0),
-        pitchVariability: parseFloat(mlResponse.audio_prediction.features.pitch_variability || 0),
-        speechRate: parseFloat(mlResponse.audio_prediction.features.speech_rate || 0),
-        pauseDuration: parseFloat(mlResponse.audio_prediction.features.pause_duration || 0),
-        voiceEnergy: parseFloat(mlResponse.audio_prediction.features.voice_energy || 0),
-        jitter: parseFloat(mlResponse.audio_prediction.features.jitter || 0),
-        shimmer: parseFloat(mlResponse.audio_prediction.features.shimmer || 0),
-        hnr: parseFloat(mlResponse.audio_prediction.features.hnr || 0),
+        pitch: pitchVal,
+        pitchVariability: pitchVarVal,
+        speechRate: speechRateVal,
+        pauseDuration: pauseDurVal,
+        voiceEnergy: voiceEnergyVal,
+        jitter: jitterVal,
+        shimmer: shimmerVal,
+        hnr: hnrVal,
 
         // Predictions
-        audioDisorder: mlResponse.audio_prediction.prediction,
-        audioConfidence: parseFloat(mlResponse.audio_prediction.confidence || 0),
-        tabularDisorder: mlResponse.tabular_prediction.prediction,
-        finalDisorder: mlResponse.final_prediction.final_disorder,
-        decision: mlResponse.final_prediction.decision,
+        audioDisorder: audioDisorderVal,
+        audioConfidence: audioConfidenceVal,
+        tabularDisorder: tabularDisorderVal,
+        finalDisorder: finalDisorderVal,
+        decision: decisionVal,
         
-        allTabularPredictions: JSON.stringify(mlResponse.final_prediction.all_tabular_predictions),
-        riskFlags: JSON.stringify(mlResponse.final_prediction.risk_flags),
+        allTabularPredictions: allTabularPredictionsVal,
+        riskFlags: riskFlagsVal,
         pdfReportName: mlResponse.pdf_report_name || null,
       },
     });

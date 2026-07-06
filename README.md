@@ -1,8 +1,8 @@
-# 🧠 MentalHealth_ML
+# 🧠 MindTone
 
 ## Explainable Multimodal AI Framework for Mental Health Assessment
 
-**MentalHealth_ML** is an explainable multimodal machine learning framework developed for early mental health screening and assessment. It combines survey questionnaire data (as the primary prediction modality) and conversational audio analysis (as the verification modality) to predict potential disorders and associated psychological risk factors.
+**MindTone** is an explainable multimodal machine learning framework developed for early mental health screening and assessment. It combines survey questionnaire data (as the primary prediction modality) and conversational audio analysis (as the verification modality) to predict potential disorders and associated psychological risk factors.
 
 The project is structured statelessly, exposing a local Python FastAPI microservice that can be consumed by multi-user web interfaces (Next.js, dashboards) for secure, simultaneous assessments.
 
@@ -32,7 +32,7 @@ The project is structured statelessly, exposing a local Python FastAPI microserv
 ## 📁 Project Structure
 
 ```text
-MentalHealth_ML/
+MindTone/
 ├── dataset/             # Datasets used for model training
 ├── history/             # Assessment history local CSV database (for CLI)
 ├── models/              # Pickled models and category encoders

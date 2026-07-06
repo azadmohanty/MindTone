@@ -56,20 +56,20 @@ export default function SurveyPage() {
     q4: "", // GAD7_2
 
     // Step 7 (Tier 2 Extended PHQ)
-    q5: "0", // PHQ9_3
-    q6: "0", // PHQ9_4
-    q7: "0", // PHQ9_5
-    q8: "0", // PHQ9_6
-    q9: "0", // PHQ9_7
-    q10: "0", // PHQ9_8
-    q11: "0", // PHQ9_9
+    q5: "", // PHQ9_3
+    q6: "", // PHQ9_4
+    q7: "", // PHQ9_5
+    q8: "", // PHQ9_6
+    q9: "", // PHQ9_7
+    q10: "", // PHQ9_8
+    q11: "", // PHQ9_9
 
     // Step 8 (Tier 2 Extended GAD)
-    q12: "0", // GAD7_3
-    q13: "0", // GAD7_4
-    q14: "0", // GAD7_5
-    q15: "0", // GAD7_6
-    q16: "0", // GAD7_7
+    q12: "", // GAD7_3
+    q13: "", // GAD7_4
+    q14: "", // GAD7_5
+    q15: "", // GAD7_6
+    q16: "", // GAD7_7
   });
 
   const updateField = (key: string, value: any) => {

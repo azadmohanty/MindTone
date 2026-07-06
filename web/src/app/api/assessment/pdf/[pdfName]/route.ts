@@ -21,26 +21,27 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
       return NextResponse.json({ error: "Invalid report filename" }, { status: 400 });
     }
 
-    // Locate the PDF file in the Python output reports directory
-    const pdfPath = path.join(process.cwd(), "..", "outputs", "reports", pdfName);
+    // Locate the PDF file in the Python output reports directory, supporting multiple working directory contexts
+    const candidates = [
+      path.join(process.cwd(), "..", "outputs", "reports", pdfName),
+      path.join(process.cwd(), "outputs", "reports", pdfName),
+      path.join(process.cwd(), "web", "public", "uploads", "reports", pdfName),
+      path.join(process.cwd(), "public", "uploads", "reports", pdfName)
+    ];
 
-    if (!fs.existsSync(pdfPath)) {
-      // Fallback check in case the path is resolved slightly differently
-      const altPdfPath = path.resolve(process.cwd(), "public", "uploads", "reports", pdfName);
-      if (!fs.existsSync(altPdfPath)) {
-        return NextResponse.json({ error: "PDF Report file not found on disk." }, { status: 404 });
+    let finalPdfPath = "";
+    for (const p of candidates) {
+      if (fs.existsSync(p)) {
+        finalPdfPath = p;
+        break;
       }
-      
-      const fileBuffer = fs.readFileSync(altPdfPath);
-      return new NextResponse(fileBuffer, {
-        headers: {
-          "Content-Type": "application/pdf",
-          "Content-Disposition": `attachment; filename="${pdfName}"`,
-        },
-      });
     }
 
-    const fileBuffer = fs.readFileSync(pdfPath);
+    if (!finalPdfPath) {
+      return NextResponse.json({ error: "PDF Report file not found on disk." }, { status: 404 });
+    }
+
+    const fileBuffer = fs.readFileSync(finalPdfPath);
 
     return new NextResponse(fileBuffer, {
       headers: {

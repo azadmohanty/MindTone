@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { 
-  Brain, 
   LayoutDashboard, 
   ClipboardList, 
   History, 
@@ -56,8 +55,8 @@ export default function Sidebar({ session }: SidebarProps) {
       {/* 1. Mobile Header Bar */}
       <header className="md:hidden fixed top-0 left-0 w-full h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-40">
         <div className="flex items-center gap-2 text-indigo-600 font-bold">
-          <Brain className="h-6 w-6" />
-          <span className="tracking-tight text-slate-800 font-semibold">MentalHealth_ML</span>
+          <img src="/logo.png" className="h-6 w-6 object-contain" alt="MindTone logo" />
+          <span className="tracking-tight text-slate-800 font-semibold">MindTone</span>
         </div>
         <button
           onClick={() => setIsOpen(true)}
@@ -76,8 +75,8 @@ export default function Sidebar({ session }: SidebarProps) {
               {/* Header Drawer */}
               <div className="flex justify-between items-center mb-8">
                 <div className="flex items-center gap-2 text-indigo-600 font-bold">
-                  <Brain className="h-6 w-6" />
-                  <span className="tracking-tight text-slate-800 font-semibold">MentalHealth_ML</span>
+                  <img src="/logo.png" className="h-6 w-6 object-contain" alt="MindTone logo" />
+                  <span className="tracking-tight text-slate-800 font-semibold">MindTone</span>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -138,8 +137,8 @@ export default function Sidebar({ session }: SidebarProps) {
         <div>
           {/* Brand header */}
           <div className="flex items-center gap-2.5 text-indigo-600 font-extrabold mb-10 px-2">
-            <Brain className="h-7 w-7" />
-            <span className="tracking-tight text-slate-800 text-base font-semibold">MentalHealth_ML</span>
+            <img src="/logo.png" className="h-7 w-7 object-contain" alt="MindTone logo" />
+            <span className="tracking-tight text-slate-800 text-base font-semibold">MindTone</span>
           </div>
 
           {/* Navigation Links */}
