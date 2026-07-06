@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  password    String
+  role        String       @default("USER") // "USER" or "ADMIN"
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  assessments Assessment[]
+}
+
+model Assessment {
+  id                        String   @id @default(uuid())
+  userId                    String
+  user                      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date                      DateTime @default(now())
+  
+  // Demographics
+  fullName                  String
+  mobileNumber              String?
+  
+  // Questionnaire responses (39 fields)
+  moodChanges               String
+  optimismLevel             Int
+  currentEmotionalState     String
+  overthinking              String
+  socialFear                String
+  concentration             Int
+  socialInteraction         String
+  sleepPattern              String
+  reducedNeedForSleep       String
+  increasedEnergyLevel      String
+  suicidalThoughts          String
+  phq9Score                 Int
+  anxiety7Score             Int
+  pastTrauma                String
+  intrusiveMemories         String
+  avoidanceBehaviour        String
+  familyStructure           String
+  familyDynamics            String
+  maritalAndFamilyConflict  String
+  financialStress           String
+  emotionalSupport          String
+  feelingOfLoneliness       String
+  feelingUnderstood         String
+  phq9_1                    Int
+  phq9_2                    Int
+  phq9_3                    Int
+  phq9_4                    Int
+  phq9_5                    Int
+  phq9_6                    Int
+  phq9_7                    Int
+  phq9_8                    Int
+  phq9_9                    Int
+  gad7_1                    Int
+  gad7_2                    Int
+  gad7_3                    Int
+  gad7_4                    Int
+  gad7_5                    Int
+  gad7_6                    Int
+  gad7_7                    Int
+  
+  // Acoustic speech features (8 fields)
+  pitch                     Float
+  pitchVariability          Float
+  speechRate                Float
+  pauseDuration             Float
+  voiceEnergy               Float
+  jitter                    Float
+  shimmer                   Float
+  hnr                       Float
+  
+  // Model Predictions & Fusion Decision
+  audioDisorder             String
+  audioConfidence           Float
+  tabularDisorder           String
+  finalDisorder             String
+  decision                  String   // e.g. "Verified by Audio" or "Tabular Dominant"
+  
+  // Stored JSONs for frontend mapping
+  allTabularPredictions     String   // Stringified JSON object of display names -> percentages
+  riskFlags                 String   // Stringified JSON object of risks -> "Yes"/"No"
+  
+  pdfReportName             String?  // References path/name of dynamically generated PDF report
+}
