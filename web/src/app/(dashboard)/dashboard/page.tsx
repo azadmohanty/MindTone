@@ -31,18 +31,18 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8 animate-fade-in text-slate-200">
+    <div className="space-y-8 animate-fade-in text-slate-800 font-sans">
       
       {/* 1. Welcome Header Banner */}
-      <div className="bg-[#161a22] border border-slate-800/80 p-8 rounded-2xl relative">
+      <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] shadow-sm relative">
         <div className="space-y-2 relative z-10">
-          <span className="text-[10px] font-bold text-[#8fbc8f] uppercase tracking-widest bg-[#5b7a61]/10 px-3 py-1 rounded border border-[#5b7a61]/20">
+          <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded border border-indigo-100">
             Overview Panel
           </span>
-          <h1 className="text-2xl font-bold text-white tracking-tight pt-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight pt-2">
             Hello, {session?.name || "User"}
           </h1>
-          <p className="text-xs text-slate-400 max-w-lg leading-relaxed">
+          <p className="text-sm text-slate-500 max-w-lg leading-relaxed font-medium">
             Access your clinically-backed questionnaire analytics, review voice analysis reports, or record a new screening today.
           </p>
         </div>
@@ -52,37 +52,37 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         
         {/* Metric 1 */}
-        <div className="bg-[#161a22] border border-slate-800 p-6 rounded-xl flex items-center gap-4">
-          <div className="p-3 bg-[#5b7a61]/10 border border-[#5b7a61]/20 text-[#8fbc8f] rounded-lg">
+        <div className="bg-white border border-slate-200/60 p-6 rounded-2xl flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-xl">
             <ClipboardList className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Completed Reports</p>
-            <h3 className="text-xl font-bold text-white mt-0.5">{assessmentCount}</h3>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Completed Reports</p>
+            <h3 className="text-xl font-extrabold text-slate-900 mt-0.5">{assessmentCount}</h3>
           </div>
         </div>
 
         {/* Metric 2 */}
-        <div className="bg-[#161a22] border border-slate-800 p-6 rounded-xl flex items-center gap-4">
-          <div className="p-3 bg-[#5b7a61]/10 border border-[#5b7a61]/20 text-[#8fbc8f] rounded-lg">
+        <div className="bg-white border border-slate-200/60 p-6 rounded-2xl flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-xl">
             <Activity className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Latest Diagnosis</p>
-            <h3 className="text-xs font-bold text-white mt-1.5 truncate max-w-[165px]">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Latest Diagnosis</p>
+            <h3 className="text-xs font-bold text-slate-900 mt-1.5 truncate max-w-[165px]">
               {latestAssessment ? latestAssessment.finalDisorder : "No reports yet"}
             </h3>
           </div>
         </div>
 
         {/* Metric 3 */}
-        <div className="bg-[#161a22] border border-slate-800 p-6 rounded-xl flex items-center gap-4">
-          <div className="p-3 bg-[#5b7a61]/10 border border-[#5b7a61]/20 text-[#8fbc8f] rounded-lg">
+        <div className="bg-white border border-slate-200/60 p-6 rounded-2xl flex items-center gap-4 shadow-sm">
+          <div className="p-3 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-xl">
             <Calendar className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Last Assessment</p>
-            <h3 className="text-xs font-bold text-white mt-1.5">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Assessment</p>
+            <h3 className="text-xs font-bold text-slate-900 mt-1.5">
               {latestAssessment ? latestAssessment.date.toDateString() : "Never"}
             </h3>
           </div>
@@ -94,52 +94,52 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Column 1: Call to Action */}
-        <div className="bg-[#161a22] border border-slate-800 p-8 rounded-2xl flex flex-col justify-between space-y-6">
+        <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] flex flex-col justify-between space-y-6 shadow-sm">
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-white">Record New Screening</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-lg font-extrabold text-slate-900">Record New Screening</h3>
+            <p className="text-xs text-slate-500 leading-relaxed font-medium">
               Take a comprehensive mental health assessment. Our dual questionnaire and speech classification engine will evaluate clinical flags in real-time.
             </p>
           </div>
           <Link
             href="/survey"
-            className="w-full sm:w-auto px-5 py-2.5 bg-[#5b7a61] hover:bg-[#4b6651] text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center transition active:scale-[0.98] shadow-sm"
+            className="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center transition active:scale-[0.98] shadow-md shadow-indigo-600/10"
           >
             Start Assessment
           </Link>
         </div>
 
         {/* Column 2: Quick History Preview */}
-        <div className="bg-[#161a22] border border-slate-800 p-8 rounded-2xl space-y-6">
-          <h3 className="text-lg font-bold text-white">Recent Record Preview</h3>
+        <div className="bg-white border border-slate-200/80 p-8 rounded-[2rem] space-y-6 shadow-sm">
+          <h3 className="text-lg font-extrabold text-slate-900">Recent Record Preview</h3>
           
           {latestAssessment ? (
-            <div className="bg-[#0e1115] border border-slate-800/80 p-5 rounded-xl space-y-3">
+            <div className="bg-slate-50/50 border border-slate-200 p-5 rounded-xl space-y-3">
               <div className="flex justify-between items-start">
-                <span className="text-[10px] text-slate-500 font-bold">{latestAssessment.date.toLocaleDateString()}</span>
-                <span className="text-[9px] font-bold text-[#8fbc8f] bg-[#5b7a61]/10 border border-[#5b7a61]/20 px-2 py-0.5 rounded">
+                <span className="text-[10px] text-slate-400 font-bold">{latestAssessment.date.toLocaleDateString()}</span>
+                <span className="text-[9px] font-bold text-indigo-650 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded">
                   {latestAssessment.decision}
                 </span>
               </div>
               <div>
-                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Condition Assessment</p>
-                <p className="text-sm font-bold text-white mt-0.5">{latestAssessment.finalDisorder}</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Condition Assessment</p>
+                <p className="text-sm font-bold text-slate-950 mt-0.5">{latestAssessment.finalDisorder}</p>
               </div>
-              <div className="flex gap-4 pt-1 text-xs text-slate-400">
-                <p>PHQ-9 Score: <span className="text-[#8fbc8f] font-bold">{latestAssessment.phq9Score}</span></p>
-                <p>Anxiety-7 Score: <span className="text-[#8fbc8f] font-bold">{latestAssessment.anxiety7Score}</span></p>
+              <div className="flex gap-4 pt-1 text-xs text-slate-500">
+                <p>PHQ-9 Score: <span className="text-indigo-600 font-bold">{latestAssessment.phq9Score}</span></p>
+                <p>Anxiety-7 Score: <span className="text-indigo-600 font-bold">{latestAssessment.anxiety7Score}</span></p>
               </div>
             </div>
           ) : (
-            <div className="h-32 flex flex-col items-center justify-center text-center text-slate-500 border border-dashed border-slate-800 rounded-xl p-4">
-              <AlertCircle className="h-7 w-7 text-slate-600 mb-2" />
+            <div className="h-32 flex flex-col items-center justify-center text-center text-slate-400 border border-dashed border-slate-200 rounded-xl p-4">
+              <AlertCircle className="h-7 w-7 text-slate-300 mb-2" />
               <p className="text-xs font-semibold">No diagnostic history available.</p>
             </div>
           )}
 
           <Link
             href="/history"
-            className="block text-center text-xs font-bold text-[#8fbc8f] hover:text-[#a9dfa9] transition"
+            className="block text-center text-xs font-bold text-indigo-600 hover:text-indigo-500 transition"
           >
             View Full Assessment History →
           </Link>

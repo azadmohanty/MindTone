@@ -289,27 +289,27 @@ export default function SurveyPage() {
   const progressPct = Math.round(((currentStep - 1) / 8) * 100);
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6 text-slate-200">
+    <div className="w-full max-w-2xl mx-auto space-y-6 text-slate-800 font-sans">
       
       {/* Step Header */}
-      <div className="flex justify-between items-center bg-[#161a22] border border-slate-800 px-6 py-4 rounded-2xl">
+      <div className="flex justify-between items-center bg-white border border-slate-200/80 px-6 py-4 rounded-2xl shadow-sm">
         <div>
-          <span className="text-[10px] font-bold text-[#8fbc8f] uppercase tracking-wider">Step {currentStep} of 9</span>
-          <h2 className="text-sm font-extrabold text-white uppercase tracking-tight">Clinical Assessment Survey</h2>
+          <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">Step {currentStep} of 9</span>
+          <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Clinical Assessment Survey</h2>
         </div>
-        <div className="w-24 bg-[#0e1115] h-2 rounded overflow-hidden border border-slate-800/80">
-          <div className="bg-[#5b7a61] h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
+        <div className="w-24 bg-slate-100 h-2 rounded overflow-hidden border border-slate-200">
+          <div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
         </div>
       </div>
 
-      <div className="bg-[#161a22] border border-slate-800 shadow-xl rounded-2xl p-6 sm:p-10 relative">
+      <div className="bg-white border border-slate-200/80 shadow-md rounded-[2rem] p-6 sm:p-12 relative">
         {errorMsg && (
-          <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 p-4 rounded-xl text-xs font-semibold mb-6 animate-pulse">
+          <div className="bg-rose-500/10 border border-rose-500/20 text-rose-600 p-4 rounded-xl text-xs font-semibold mb-6 animate-pulse">
             {errorMsg}
           </div>
         )}
         {successMsg && (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-4 rounded-xl text-xs font-semibold mb-6">
+          <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 p-4 rounded-xl text-xs font-semibold mb-6">
             {successMsg}
           </div>
         )}
@@ -318,29 +318,29 @@ export default function SurveyPage() {
         {currentStep === 1 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 1: Demographics</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Tell us about yourself</h2>
-              <p className="text-xs text-slate-400">Provide registration inputs to connect with your clinical record.</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 1: Demographics</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Tell us about yourself</h2>
+              <p className="text-sm text-slate-500">Provide name and contact details to proceed with the clinical survey.</p>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 pt-4 border-t border-slate-100">
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Full Name *</label>
+                <label className="block text-sm font-semibold text-slate-700">Full Name <span className="text-indigo-500">*</span></label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-3 bg-[#0e1115] border border-slate-800 rounded-xl focus:border-[#5b7a61] focus:ring-1 focus:ring-[#5b7a61]/20 focus:outline-none text-sm text-white"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none text-sm font-medium text-slate-800"
                 />
               </div>
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Mobile Number</label>
+                <label className="block text-sm font-semibold text-slate-700">Mobile Number</label>
                 <input
                   type="tel"
                   value={formData.mobile}
                   onChange={(e) => updateField("mobile", e.target.value)}
                   placeholder="Enter your mobile number"
-                  className="w-full px-4 py-3 bg-[#0e1115] border border-slate-800 rounded-xl focus:border-[#5b7a61] focus:ring-1 focus:ring-[#5b7a61]/20 focus:outline-none text-sm text-white"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none text-sm font-medium text-slate-800"
                 />
               </div>
             </div>
@@ -351,21 +351,24 @@ export default function SurveyPage() {
         {currentStep === 2 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 2: Cognitive Profile</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Emotional & Cognitive Profile</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 2: Cognitive Profile</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Emotional & Cognitive Profile</h2>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Mood swings */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you frequently experience sudden changes in mood? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you frequently experience sudden changes in mood? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("moodChanges", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.moodChanges === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.moodChanges === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.moodChanges === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -373,10 +376,10 @@ export default function SurveyPage() {
               </div>
 
               {/* Optimism level slider */}
-              <div className="space-y-2 p-4 bg-[#0e1115] rounded-xl border border-slate-800">
-                <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-slate-300 uppercase tracking-wider">Optimism Level (1 to 10)</span>
-                  <span className="text-[#8fbc8f] font-bold">{formData.optimismLevel}</span>
+              <div className="space-y-3 p-5 bg-slate-50 border border-slate-200/50 rounded-3xl">
+                <div className="flex justify-between items-center text-sm font-semibold">
+                  <span className="text-slate-750">Optimism Level (1 to 10)</span>
+                  <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded text-xs">{formData.optimismLevel}</span>
                 </div>
                 <input
                   type="range"
@@ -384,20 +387,20 @@ export default function SurveyPage() {
                   max="10"
                   value={formData.optimismLevel}
                   onChange={(e) => updateField("optimismLevel", parseInt(e.target.value, 10))}
-                  className="w-full h-1.5 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-[#5b7a61]"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                 />
               </div>
 
               {/* Current emotion state */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Which emotion best describes how you usually feel? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Which emotion best describes how you usually feel? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                   {["Anger", "Fear", "Happy", "Neutral", "Sad"].map((emotion) => (
                     <button
                       key={emotion}
                       type="button"
                       onClick={() => updateField("currentEmotionalState", emotion)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.currentEmotionalState === emotion ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`p-3 rounded-xl border-2 text-xs font-bold transition duration-150 ${formData.currentEmotionalState === emotion ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       {emotion}
                     </button>
@@ -407,15 +410,18 @@ export default function SurveyPage() {
 
               {/* Overthinking */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you frequently overthink or repeatedly worry about situations? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you frequently overthink or repeatedly worry about situations? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("overthinking", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.overthinking === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.overthinking === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.overthinking === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -424,15 +430,18 @@ export default function SurveyPage() {
 
               {/* Social Fear */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">How often do you feel nervous or fearful in social situations? *</label>
+                <label className="block text-sm font-semibold text-slate-700">How often do you feel nervous or fearful in social situations? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["High", "Moderate", "Low"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("socialFear", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialFear === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialFear === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.socialFear === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -440,10 +449,10 @@ export default function SurveyPage() {
               </div>
 
               {/* Concentration Level */}
-              <div className="space-y-2 p-4 bg-[#0e1115] rounded-xl border border-slate-800">
-                <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-slate-300 uppercase tracking-wider">Concentration Ability (1 to 10)</span>
-                  <span className="text-[#8fbc8f] font-bold">{formData.concentration}</span>
+              <div className="space-y-3 p-5 bg-slate-50 border border-slate-200/50 rounded-3xl">
+                <div className="flex justify-between items-center text-sm font-semibold">
+                  <span className="text-slate-750">Concentration Ability (1 to 10)</span>
+                  <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded text-xs">{formData.concentration}</span>
                 </div>
                 <input
                   type="range"
@@ -451,21 +460,24 @@ export default function SurveyPage() {
                   max="10"
                   value={formData.concentration}
                   onChange={(e) => updateField("concentration", parseInt(e.target.value, 10))}
-                  className="w-full h-1.5 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-[#5b7a61]"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                 />
               </div>
 
               {/* Social interaction */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">How would you describe your level of social interaction? *</label>
+                <label className="block text-sm font-semibold text-slate-700">How would you describe your level of social interaction? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["High", "Moderate", "Low"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("socialInteraction", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.socialInteraction === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.socialInteraction === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.socialInteraction === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -479,21 +491,24 @@ export default function SurveyPage() {
         {currentStep === 3 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 3: Context Profile</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Sleep patterns & Trauma History</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 3: Context Profile</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Sleep patterns & Trauma History</h2>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Sleep Pattern */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Sleep pattern during the past month? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Sleep pattern during the past month? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Normal", "Reduced", "Excessive"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("sleepPattern", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.sleepPattern === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.sleepPattern === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.sleepPattern === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -502,15 +517,18 @@ export default function SurveyPage() {
 
               {/* Reduced sleep need */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you feel energetic despite sleeping very little? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you feel energetic despite sleeping very little? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("reducedNeedForSleep", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.reducedNeedForSleep === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.reducedNeedForSleep === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.reducedNeedForSleep === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -519,15 +537,18 @@ export default function SurveyPage() {
 
               {/* Increased energy */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">An unusual increase in energy level or activity? *</label>
+                <label className="block text-sm font-semibold text-slate-700">An unusual increase in energy level or activity? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("increasedEnergyLevel", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.increasedEnergyLevel === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.increasedEnergyLevel === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.increasedEnergyLevel === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -536,15 +557,18 @@ export default function SurveyPage() {
 
               {/* Past Trauma */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Have you experienced any past trauma? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Have you experienced any past trauma? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("pastTrauma", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.pastTrauma === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.pastTrauma === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.pastTrauma === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -553,15 +577,18 @@ export default function SurveyPage() {
 
               {/* Intrusive memories */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you experience intrusive memories or flashbacks? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you experience intrusive memories or flashbacks? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("intrusiveMemories", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.intrusiveMemories === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.intrusiveMemories === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.intrusiveMemories === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -570,15 +597,18 @@ export default function SurveyPage() {
 
               {/* Avoidance behavior */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you actively avoid thoughts/places connected to trauma? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you actively avoid thoughts/places connected to trauma? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("avoidanceBehaviour", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.avoidanceBehaviour === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.avoidanceBehaviour === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.avoidanceBehaviour === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -592,21 +622,24 @@ export default function SurveyPage() {
         {currentStep === 4 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 4: Family Dynamics</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Family Context & Environment</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 4: Family Dynamics</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Family Context & Environment</h2>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Family Structure */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Family Structure *</label>
+                <label className="block text-sm font-semibold text-slate-700">Family Structure <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Joint", "Nuclear", "Other"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("familyStructure", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyStructure === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.familyStructure === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.familyStructure === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -615,15 +648,18 @@ export default function SurveyPage() {
 
               {/* Family Dynamics */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Family Dynamics *</label>
+                <label className="block text-sm font-semibold text-slate-700">Family Dynamics <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Supportive", "Neutral", "Dysfunctional"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("familyDynamics", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.familyDynamics === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.familyDynamics === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.familyDynamics === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -632,15 +668,18 @@ export default function SurveyPage() {
 
               {/* Marital & Family conflict */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Marital & Family Conflict *</label>
+                <label className="block text-sm font-semibold text-slate-700">Marital & Family Conflict <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["No", "Occasional", "Frequent"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("maritalAndFamilyConflict", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.maritalAndFamilyConflict === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.maritalAndFamilyConflict === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.maritalAndFamilyConflict === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -649,14 +688,14 @@ export default function SurveyPage() {
 
               {/* Financial Stress */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Financial Stress *</label>
+                <label className="block text-sm font-semibold text-slate-700">Financial Stress <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-4 gap-1.5">
                   {["Low", "Medium", "Moderate", "High"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("financialStress", opt)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.financialStress === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`p-3.5 rounded-xl border-2 text-xs font-bold transition duration-150 ${formData.financialStress === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
                       {opt}
                     </button>
@@ -666,15 +705,18 @@ export default function SurveyPage() {
 
               {/* Emotional Support */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Emotional Support Availability *</label>
+                <label className="block text-sm font-semibold text-slate-700">Emotional Support Availability <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Available", "Partial Available", "Unavailable"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("emotionalSupport", opt)}
-                      className={`p-2.5 rounded-lg border text-[10px] font-bold transition ${formData.emotionalSupport === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.emotionalSupport === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.emotionalSupport === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -688,21 +730,24 @@ export default function SurveyPage() {
         {currentStep === 5 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 5: Self-Perception</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Social Isolation & Connection</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 5: Self-Perception</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Social Isolation & Connection</h2>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Feeling of Loneliness */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you feel a sense of loneliness? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you feel a sense of loneliness? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("feelingOfLoneliness", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingOfLoneliness === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.feelingOfLoneliness === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.feelingOfLoneliness === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -711,15 +756,18 @@ export default function SurveyPage() {
 
               {/* Feeling Understood */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Do you feel understood by people close to you? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Do you feel understood by people close to you? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("feelingUnderstood", opt)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition ${formData.feelingUnderstood === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.feelingUnderstood === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.feelingUnderstood === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -733,22 +781,25 @@ export default function SurveyPage() {
         {currentStep === 6 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 6: Health screening</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Safety Screening & Clinical Baseline</h2>
-              <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 6: Health screening</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Safety Screening & Clinical Baseline</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {/* Suicidal thoughts */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Thoughts that you would be better off dead or hurting yourself? *</label>
+                <label className="block text-sm font-semibold text-slate-700">Thoughts that you would be better off dead or hurting yourself? <span className="text-indigo-500">*</span></label>
                 <div className="grid grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
                       type="button"
                       onClick={() => updateField("suicidalThoughts", opt)}
-                      className={`p-3.5 rounded-xl border text-xs font-bold transition ${formData.suicidalThoughts === opt ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                      className={`flex items-center gap-3.5 p-4 border-2 rounded-2xl transition duration-150 font-semibold text-sm ${formData.suicidalThoughts === opt ? "bg-indigo-50/50 border-indigo-500 text-indigo-700" : "bg-white border-slate-200 text-slate-600 hover:border-indigo-500"}`}
                     >
+                      <div className="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center">
+                        {formData.suicidalThoughts === opt && <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />}
+                      </div>
                       {opt}
                     </button>
                   ))}
@@ -764,8 +815,8 @@ export default function SurveyPage() {
               ].map((item) => {
                 const val = (formData as any)[item.key];
                 return (
-                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 animate-fade-in">
-                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
+                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100">
+                    <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -777,7 +828,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                          className={`p-2.5 rounded-lg border-2 text-[10px] font-bold leading-tight transition duration-150 ${val === choice.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700 font-bold" : "bg-white border-slate-200 text-slate-500 hover:border-indigo-500"}`}
                         >
                           {choice.text}
                         </button>
@@ -794,11 +845,11 @@ export default function SurveyPage() {
         {currentStep === 7 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 7: Extended Depression Module</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Depression Diagnostic screening</h2>
-              <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 7: Extended Depression Module</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Depression Diagnostic screening</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {[
                 { label: "Q5. Trouble falling or staying asleep, or sleeping too much? *", key: "q5" },
                 { label: "Q6. Feeling tired or having little energy? *", key: "q6" },
@@ -810,8 +861,8 @@ export default function SurveyPage() {
               ].map((item) => {
                 const val = (formData as any)[item.key];
                 return (
-                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 first:border-0">
-                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
+                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100 first:border-0">
+                    <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -823,7 +874,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                          className={`p-2.5 rounded-lg border-2 text-[10px] font-bold leading-tight transition duration-150 ${val === choice.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700 font-bold" : "bg-white border-slate-200 text-slate-500 hover:border-indigo-500"}`}
                         >
                           {choice.text}
                         </button>
@@ -840,11 +891,11 @@ export default function SurveyPage() {
         {currentStep === 8 && (
           <section className="space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 8: Extended Anxiety Module</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Anxiety Diagnostic screening</h2>
-              <p className="text-xs text-slate-400">Over the last 2 weeks, how often have you been bothered by the following?</p>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 8: Extended Anxiety Module</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Anxiety Diagnostic screening</h2>
+              <p className="text-sm text-slate-500">Over the last 2 weeks, how often have you been bothered by the following?</p>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 pt-4 border-t border-slate-100">
               {[
                 { label: "Q12. Worrying too much about different things? *", key: "q12" },
                 { label: "Q13. Trouble relaxing? *", key: "q13" },
@@ -854,8 +905,8 @@ export default function SurveyPage() {
               ].map((item) => {
                 const val = (formData as any)[item.key];
                 return (
-                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-800/40 first:border-0">
-                    <label className="block text-xs font-semibold text-slate-350">{item.label}</label>
+                  <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100 first:border-0">
+                    <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
                     <div className="grid grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
@@ -867,7 +918,7 @@ export default function SurveyPage() {
                           key={choice.val}
                           type="button"
                           onClick={() => updateField(item.key, choice.val)}
-                          className={`p-2.5 rounded-lg border text-[10px] font-bold leading-tight transition ${val === choice.val ? "bg-[#5b7a61] border-[#5b7a61] text-white" : "bg-[#0e1115] border-slate-800 text-slate-400 hover:border-[#5b7a61]"}`}
+                          className={`p-2.5 rounded-lg border-2 text-[10px] font-bold leading-tight transition duration-150 ${val === choice.val ? "bg-indigo-50/50 border-indigo-500 text-indigo-700 font-bold" : "bg-white border-slate-200 text-slate-500 hover:border-indigo-500"}`}
                         >
                           {choice.text}
                         </button>
@@ -884,8 +935,8 @@ export default function SurveyPage() {
         {currentStep === 9 && (
           <section className="space-y-6">
             <div className="space-y-2 text-center">
-              <span className="text-xs font-bold text-[#8fbc8f] uppercase tracking-widest">Section 9: Multimodal Verification</span>
-              <h2 className="text-2xl font-bold tracking-tight text-white">Conversational Voice Recording</h2>
+              <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Section 9: Multimodal Verification</span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Conversational Voice Recording</h2>
             </div>
             
             <div className="py-2">
@@ -895,11 +946,11 @@ export default function SurveyPage() {
         )}
 
         {/* Survey Navigation Footer */}
-        <footer className="mt-8 pt-6 border-t border-slate-800/60 flex justify-between items-center">
+        <footer className="mt-8 pt-6 border-t border-slate-150 flex justify-between items-center">
           <button
             onClick={handleBack}
             disabled={currentStep === 1 || loading}
-            className={`px-5 py-2.5 bg-slate-800 text-slate-200 hover:bg-slate-750 text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed ${currentStep === 1 ? "invisible" : ""}`}
+            className={`px-5 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed ${currentStep === 1 ? "invisible" : ""}`}
           >
             Back
           </button>
@@ -907,7 +958,7 @@ export default function SurveyPage() {
           <button
             onClick={handleNext}
             disabled={!isStepValid() || loading}
-            className="px-6 py-2.5 bg-[#5b7a61] hover:bg-[#4b6651] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

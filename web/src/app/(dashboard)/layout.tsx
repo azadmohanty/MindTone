@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   const session = await getSession();
 
   return (
-    <div className="min-h-screen bg-[#0e1115] flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans">
       {/* Responsive Sidebar Overlay / Drawer */}
       <Sidebar session={session} />
 
