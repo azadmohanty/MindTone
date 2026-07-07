@@ -34,7 +34,8 @@ export async function POST(request: NextRequest) {
       const fileBlob = new Blob([buffer], { type: "audio/webm" });
       mlFormData.append("file", fileBlob, "audio.webm");
 
-      const res = await fetch("http://127.0.0.1:8000/predict/multimodal", {
+      const backendUrl = process.env.PYTHON_API_URL || "http://127.0.0.1:8000";
+      const res = await fetch(`${backendUrl}/predict/multimodal`, {
         method: "POST",
         body: mlFormData,
       });
