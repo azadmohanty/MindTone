@@ -37,8 +37,8 @@ export async function GET(request: NextRequest) {
     let avgPhq = 0;
     let avgGad = 0;
     if (totalAssessments > 0) {
-      const sumPhq = assessments.reduce((acc: number, a) => acc + a.phq9Score, 0);
-      const sumGad = assessments.reduce((acc: number, a) => acc + a.anxiety7Score, 0);
+      const sumPhq = assessments.reduce((acc: number, a: any) => acc + a.phq9Score, 0);
+      const sumGad = assessments.reduce((acc: number, a: any) => acc + a.anxiety7Score, 0);
       avgPhq = parseFloat((sumPhq / totalAssessments).toFixed(1));
       avgGad = parseFloat((sumGad / totalAssessments).toFixed(1));
     }

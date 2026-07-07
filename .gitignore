@@ -19,6 +19,9 @@ node_modules/
 out/
 build/
 .next-env.d.ts
+web/.env
+web/.env.local
+web/.env.*.local
 
 # OS & IDE
 .vscode/
@@ -30,12 +33,20 @@ Thumbs.db
 *.db
 *.db-journal
 *.sqlite
-outputs/reports/Mental_Health_Report_*.pdf
-outputs/graphs/*.png
-outputs/json/*.json
-outputs/logs/*.log
+web/dev.db
+web/dev.db-journal
+
+# ML Outputs & Temporary Files
+outputs/reports/*
+!outputs/reports/Mental_Health_Report.pdf
+outputs/graphs/*
+outputs/json/*
+outputs/logs/*
 history/assessment_history.csv
 input/questionnaire.csv
 input/audio.wav
 mock_audio*.wav
 silent_audio*.wav
+
+# User Uploads
+web/public/uploads/*
