@@ -52,11 +52,11 @@ def recommendation(disorder):
     )
 
 
-def main():
+def main(data=None):
 
-    with open(str(JSON_OUTPUT / "final_prediction.json"), "r") as file:
-
-        data = json.load(file)
+    if data is None:
+        with open(str(JSON_OUTPUT / "final_prediction.json"), "r") as file:
+            data = json.load(file)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 

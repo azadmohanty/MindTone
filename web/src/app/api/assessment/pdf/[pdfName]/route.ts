@@ -38,6 +38,23 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
     }
 
     if (!finalPdfPath) {
+      // Fallback: If the requested PDF is not found, check if the generic Mental_Health_Report.pdf exists
+      const genericPdfName = "Mental_Health_Report.pdf";
+      const genericCandidates = [
+        path.join(process.cwd(), "..", "outputs", "reports", genericPdfName),
+        path.join(process.cwd(), "outputs", "reports", genericPdfName),
+        path.join(process.cwd(), "web", "public", "uploads", "reports", genericPdfName),
+        path.join(process.cwd(), "public", "uploads", "reports", genericPdfName)
+      ];
+      for (const p of genericCandidates) {
+        if (fs.existsSync(p)) {
+          finalPdfPath = p;
+          break;
+        }
+      }
+    }
+
+    if (!finalPdfPath) {
       return NextResponse.json({ error: "PDF Report file not found on disk." }, { status: 404 });
     }
 
