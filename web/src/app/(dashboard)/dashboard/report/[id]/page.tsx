@@ -135,7 +135,7 @@ export default async function ReportPage({ params }: ReportPageProps) {
 
         {assessment.pdfReportName && (
           <a
-            href={`/api/assessment/pdf/${assessment.pdfReportName}`}
+            href={`/api/assessment/pdf/${assessment.pdfReportName}?id=${assessment.id}`}
             className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-650 hover:bg-indigo-505 text-indigo-600 hover:text-indigo-700 bg-indigo-50 border border-indigo-100 text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm active:scale-[0.98]"
           >
             Download PDF Report

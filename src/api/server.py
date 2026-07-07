@@ -171,3 +171,34 @@ async def predict_multimodal(
         # Clean up temporary WAV file immediately
         if os.path.exists(temp_path):
             os.remove(temp_path)
+
+
+class RecompilePDFInput(BaseModel):
+    final_disorder: str = Field(..., alias="Final Disorder")
+    decision: str = Field(..., alias="Decision")
+    audio_prediction: str = Field(..., alias="Audio Prediction")
+    audio_confidence: float = Field(..., alias="Audio Confidence")
+    top3_disorders: list = Field(..., alias="Top 3 Disorders")
+    risk_flags: dict = Field(..., alias="Risk Flags")
+
+    class Config:
+        populate_by_name = True
+
+
+@app.post("/predict/recompile_pdf")
+def recompile_pdf(payload: RecompilePDFInput):
+    try:
+        data_dict = payload.model_dump(by_alias=True)
+        # Write to final_prediction.json so generate_graphs can read it
+        os.makedirs(str(JSON_OUTPUT), exist_ok=True)
+        with open(str(JSON_OUTPUT / "final_prediction.json"), "w") as f:
+            json.dump(data_dict, f, indent=4)
+        
+        # Build graphs
+        generate_graphs()
+        
+        # Build PDF
+        pdf_name = generate_report(data_dict)
+        return {"pdf_report_name": pdf_name}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"PDF recompilation failed: {str(e)}")
