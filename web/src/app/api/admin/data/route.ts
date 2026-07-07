@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     // Joint fusion outcomes distribution
     const decisions: Record<string, number> = {};
     const disorders: Record<string, number> = {};
-    assessments.forEach(a => {
+    assessments.forEach((a: any) => {
       decisions[a.decision] = (decisions[a.decision] || 0) + 1;
       disorders[a.finalDisorder] = (disorders[a.finalDisorder] || 0) + 1;
     });
