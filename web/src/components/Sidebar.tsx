@@ -47,7 +47,7 @@ export default function Sidebar({ session }: SidebarProps) {
   };
 
   const filteredItems = navItems.filter(
-    (item) => item.role === "USER" || (item.role === "ADMIN" && session?.role === "ADMIN")
+    (item) => item.role === (session?.role || "USER")
   );
 
   return (
