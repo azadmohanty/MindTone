@@ -202,3 +202,14 @@ def recompile_pdf(payload: RecompilePDFInput):
         return {"pdf_report_name": pdf_name}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"PDF recompilation failed: {str(e)}")
+
+
+from fastapi.responses import FileResponse
+from src.config.paths import REPORT_OUTPUT
+
+@app.get("/download_pdf/{pdf_name}")
+def download_pdf(pdf_name: str):
+    pdf_path = os.path.join(str(REPORT_OUTPUT), pdf_name)
+    if not os.path.exists(pdf_path):
+        raise HTTPException(status_code=404, detail="PDF report file not found on disk.")
+    return FileResponse(pdf_path, media_type="application/pdf", filename=pdf_name)

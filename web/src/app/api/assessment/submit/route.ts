@@ -98,20 +98,31 @@ export async function POST(request: NextRequest) {
       };
     }
 
-    // 3. Save the uploaded audio file to public/uploads/audio/
+    // 3. Save the uploaded audio file to public/uploads/audio/ (fallback to /tmp in read-only serverless filesystems)
     const assessmentId = Math.random().toString(36).substring(2, 15);
     const uploadDir = path.join(process.cwd(), "public", "uploads", "audio");
-    
-    // Ensure parent directories exist
-    fs.mkdirSync(uploadDir, { recursive: true });
-
-    const arrayBuffer = await audioFile.arrayBuffer();
-    const fileBuffer = Buffer.from(arrayBuffer);
     const audioFilename = `audio_${assessmentId}.webm`;
-    const audioFilePath = path.join(uploadDir, audioFilename);
-    
-    fs.writeFileSync(audioFilePath, fileBuffer);
     const audioUrl = `/uploads/audio/${audioFilename}`;
+    
+    try {
+      fs.mkdirSync(uploadDir, { recursive: true });
+      const arrayBuffer = await audioFile.arrayBuffer();
+      const fileBuffer = Buffer.from(arrayBuffer);
+      const audioFilePath = path.join(uploadDir, audioFilename);
+      fs.writeFileSync(audioFilePath, fileBuffer);
+    } catch (writeError) {
+      console.warn("Could not save audio file to public directory (read-only filesystem):", writeError);
+      try {
+        const tmpDir = path.join("/tmp", "uploads", "audio");
+        fs.mkdirSync(tmpDir, { recursive: true });
+        const arrayBuffer = await audioFile.arrayBuffer();
+        const fileBuffer = Buffer.from(arrayBuffer);
+        const tmpPath = path.join(tmpDir, audioFilename);
+        fs.writeFileSync(tmpPath, fileBuffer);
+      } catch (tmpError) {
+        console.warn("Failed to write to /tmp directory:", tmpError);
+      }
+    }
 
     // Safe mapping of ML Response keys (supporting both the Python FastAPI server responses and Next.js mock fallbacks)
     const audioPred = mlResponse.audio_prediction || {};

@@ -119,7 +119,25 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
     }
 
     if (!finalPdfPath) {
-      // Fallback: If the requested PDF is not found, check if the generic Mental_Health_Report.pdf exists
+      // 2. Try to download the PDF directly from the Python backend server
+      try {
+        const backendUrl = process.env.PYTHON_API_URL || "http://127.0.0.1:8000";
+        const downloadRes = await fetch(`${backendUrl}/download_pdf/${pdfName}`);
+        if (downloadRes.ok) {
+          const arrayBuffer = await downloadRes.arrayBuffer();
+          const fileBuffer = Buffer.from(arrayBuffer);
+          return new NextResponse(fileBuffer, {
+            headers: {
+              "Content-Type": "application/pdf",
+              "Content-Disposition": `attachment; filename="${pdfName}"`,
+            },
+          });
+        }
+      } catch (downloadErr) {
+        console.error("Failed to download PDF from Python backend:", downloadErr);
+      }
+
+      // Fallback: Check if the generic Mental_Health_Report.pdf exists locally
       const genericPdfName = "Mental_Health_Report.pdf";
       const genericCandidates = [
         path.join(process.cwd(), "..", "outputs", "reports", genericPdfName),
