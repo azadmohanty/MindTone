@@ -358,7 +358,7 @@ export default function SurveyPage() {
               {/* Mood swings */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you feel like your mood shifts suddenly? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -411,7 +411,7 @@ export default function SurveyPage() {
               {/* Overthinking */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you find yourself overthinking or worrying? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -431,7 +431,7 @@ export default function SurveyPage() {
               {/* Social Fear */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">How comfortable do you feel around other people? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {[
                     { label: "Comfortable", val: "Low" },
                     { label: "Somewhat uneasy", val: "Moderate" },
@@ -471,7 +471,7 @@ export default function SurveyPage() {
               {/* Social interaction */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">How often do you connect with others? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {[
                     { label: "Often", val: "High" },
                     { label: "Sometimes", val: "Moderate" },
@@ -506,7 +506,7 @@ export default function SurveyPage() {
               {/* Sleep Pattern */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">How has your sleep been this past month? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["Normal", "Reduced", "Excessive"].map((opt) => (
                     <button
                       key={opt}
@@ -526,7 +526,7 @@ export default function SurveyPage() {
               {/* Reduced sleep need */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you ever feel highly energetic even if you sleep very little? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -546,7 +546,7 @@ export default function SurveyPage() {
               {/* Increased energy */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Have you noticed any unusual bursts of energy or activity? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -566,7 +566,7 @@ export default function SurveyPage() {
               {/* Past Trauma */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Have you experienced any challenging or overwhelming events in the past? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -606,7 +606,7 @@ export default function SurveyPage() {
               {/* Avoidance behavior */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you find yourself avoiding thoughts or places that remind you of them? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -637,7 +637,7 @@ export default function SurveyPage() {
               {/* Family Structure */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Household Type <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["Joint", "Nuclear", "Other"].map((opt) => (
                     <button
                       key={opt}
@@ -657,7 +657,7 @@ export default function SurveyPage() {
               {/* Family Dynamics */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">How supportive is your household? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {[
                     { label: "Supportive", val: "Supportive" },
                     { label: "Neutral", val: "Neutral" },
@@ -681,7 +681,7 @@ export default function SurveyPage() {
               {/* Marital & Family conflict */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Is there conflict at home? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["No", "Occasional", "Frequent"].map((opt) => (
                     <button
                       key={opt}
@@ -753,7 +753,7 @@ export default function SurveyPage() {
               {/* Feeling of Loneliness */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you ever feel lonely? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -773,7 +773,7 @@ export default function SurveyPage() {
               {/* Feeling Understood */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Do you feel understood by the people around you? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   {["Yes", "Sometimes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -805,7 +805,7 @@ export default function SurveyPage() {
               {/* Suicidal thoughts */}
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-slate-700">Thoughts that you would be better off dead or of hurting yourself? <span className="text-indigo-500">*</span></label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {["Yes", "No"].map((opt) => (
                     <button
                       key={opt}
@@ -833,7 +833,7 @@ export default function SurveyPage() {
                 return (
                   <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100">
                     <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
-                    <div className="grid grid-cols-4 gap-1.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
                         { text: "Several days", val: "1" },
@@ -879,7 +879,7 @@ export default function SurveyPage() {
                 return (
                   <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100 first:border-0">
                     <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
-                    <div className="grid grid-cols-4 gap-1.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
                         { text: "Several days", val: "1" },
@@ -923,7 +923,7 @@ export default function SurveyPage() {
                 return (
                   <div key={item.key} className="space-y-2 pt-2 border-t border-slate-100 first:border-0">
                     <label className="block text-sm font-semibold text-slate-700">{item.label}</label>
-                    <div className="grid grid-cols-4 gap-1.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                       {[
                         { text: "Not at all", val: "0" },
                         { text: "Several days", val: "1" },
