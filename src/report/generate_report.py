@@ -82,6 +82,7 @@ def main(data=None):
     report_name = f"Mental_Health_Report_{timestamp}.pdf"
 
     # A4 margins setup
+    os.makedirs(str(REPORT_OUTPUT), exist_ok=True)
     pdf = SimpleDocTemplate(
         str(REPORT_OUTPUT / report_name),
         rightMargin=40, leftMargin=40, topMargin=40, bottomMargin=40

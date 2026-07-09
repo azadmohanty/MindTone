@@ -1,4 +1,5 @@
 import json
+import os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -46,6 +47,7 @@ def disorder_graph(data):
 
     plt.tight_layout()
 
+    os.makedirs(str(GRAPH_OUTPUT), exist_ok=True)
     plt.savefig(
         GRAPH_OUTPUT/"top3_disorders.png"
     )
@@ -82,8 +84,7 @@ def risk_graph(data):
 
     plt.xticks(rotation=20)
 
-    plt.tight_layout()
-
+    os.makedirs(str(GRAPH_OUTPUT), exist_ok=True)
     plt.savefig(
         GRAPH_OUTPUT/"risk_flags.png"
     )
