@@ -29,7 +29,8 @@ export default function LoginPage() {
         throw new Error(data.error || "Login failed. Please check credentials.");
       }
 
-      router.push("/dashboard");
+      const targetPath = data.user?.role === "ADMIN" ? "/admin" : "/dashboard";
+      router.push(targetPath);
       router.refresh();
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
