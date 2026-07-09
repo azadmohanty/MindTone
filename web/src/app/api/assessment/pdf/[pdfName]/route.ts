@@ -111,6 +111,14 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
             const newPdfName = compileData.pdf_report_name;
             
             if (newPdfName) {
+              // Cache/save the new pdf filename to DB for subsequent direct loads
+              if (assessmentId) {
+                await prisma.assessment.update({
+                  where: { id: assessmentId },
+                  data: { pdfReportName: newPdfName }
+                });
+              }
+
               const newCandidates = [
                 path.join(process.cwd(), "..", "outputs", "reports", newPdfName),
                 path.join(process.cwd(), "outputs", "reports", newPdfName)
@@ -121,13 +129,20 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
                   break;
                 }
               }
-              
-              // Cache/save the new pdf filename to DB for subsequent direct loads
-              if (finalPdfPath && assessmentId) {
-                await prisma.assessment.update({
-                  where: { id: assessmentId },
-                  data: { pdfReportName: newPdfName }
-                });
+
+              // If running on serverless (Vercel) where the file isn't local, fetch from Render directly
+              if (!finalPdfPath) {
+                const downloadRes = await fetch(`${backendUrl}/download_pdf/${newPdfName}`);
+                if (downloadRes.ok) {
+                  const arrayBuffer = await downloadRes.arrayBuffer();
+                  const fileBuffer = Buffer.from(arrayBuffer);
+                  return new NextResponse(fileBuffer, {
+                    headers: {
+                      "Content-Type": "application/pdf",
+                      "Content-Disposition": `attachment; filename="${newPdfName}"`,
+                    },
+                  });
+                }
               }
             }
           }
