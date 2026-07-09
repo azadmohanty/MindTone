@@ -180,6 +180,26 @@ class RecompilePDFInput(BaseModel):
     audio_confidence: float = Field(..., alias="Audio Confidence")
     top3_disorders: list = Field(..., alias="Top 3 Disorders")
     risk_flags: dict = Field(..., alias="Risk Flags")
+    
+    # Optional audio features
+    pitch: float = Field(0.0, alias="pitch")
+    pitch_variability: float = Field(0.0, alias="pitchVariability")
+    speech_rate: float = Field(0.0, alias="speechRate")
+    pause_duration: float = Field(0.0, alias="pauseDuration")
+    jitter: float = Field(0.0, alias="jitter")
+    shimmer: float = Field(0.0, alias="shimmer")
+    hnr: float = Field(0.0, alias="hnr")
+    
+    # Optional questionnaire inputs for indices and SHAP
+    feeling_of_loneliness: str = Field("No", alias="feelingOfLoneliness")
+    feeling_understood: str = Field("Yes", alias="feelingUnderstood")
+    family_dynamics: str = Field("Stable", alias="familyDynamics")
+    marital_and_family_conflict: str = Field("None", alias="maritalAndFamilyConflict")
+    emotional_support: str = Field("Available", alias="emotionalSupport")
+    social_interaction: str = Field("High", alias="socialInteraction")
+    social_fear: str = Field("Low", alias="socialFear")
+    sleep_pattern: str = Field("Normal", alias="sleepPattern")
+    overthinking: str = Field("No", alias="overthinking")
 
     class Config:
         populate_by_name = True

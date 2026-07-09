@@ -83,7 +83,23 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
               "Audio Prediction": assessment.audioDisorder || "Normal",
               "Audio Confidence": assessment.audioConfidence || 0.0,
               "Top 3 Disorders": top3List.length > 0 ? top3List : [{ rank: 1, disorder: assessment.finalDisorder || "Normal", risk: 100.0 }],
-              "Risk Flags": riskFlags
+              "Risk Flags": riskFlags,
+              pitch: assessment.pitch || 0.0,
+              pitchVariability: assessment.pitchVariability || 0.0,
+              speechRate: assessment.speechRate || 0.0,
+              pauseDuration: assessment.pauseDuration || 0.0,
+              jitter: assessment.jitter || 0.0,
+              shimmer: assessment.shimmer || 0.0,
+              hnr: assessment.hnr || 0.0,
+              feelingOfLoneliness: assessment.feelingOfLoneliness || "No",
+              feelingUnderstood: assessment.feelingUnderstood || "Yes",
+              familyDynamics: assessment.familyDynamics || "Stable",
+              maritalAndFamilyConflict: assessment.maritalAndFamilyConflict || "None",
+              emotionalSupport: assessment.emotionalSupport || "Available",
+              socialInteraction: assessment.socialInteraction || "High",
+              socialFear: assessment.socialFear || "Low",
+              sleepPattern: assessment.sleepPattern || "Normal",
+              overthinking: assessment.overthinking || "No"
             })
           });
 
