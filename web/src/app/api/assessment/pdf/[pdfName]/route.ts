@@ -22,6 +22,10 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
       return NextResponse.json({ error: "Invalid report filename" }, { status: 400 });
     }
 
+    const { searchParams } = new URL(request.url);
+    const assessmentId = searchParams.get("id");
+    const force = searchParams.get("force") === "true";
+
     // Locate the PDF file in the Python output reports directory, supporting multiple working directory contexts
     const candidates = [
       path.join(process.cwd(), "..", "outputs", "reports", pdfName),
@@ -31,18 +35,17 @@ export async function GET(request: NextRequest, { params }: RouteProps) {
     ];
 
     let finalPdfPath = "";
-    for (const p of candidates) {
-      if (fs.existsSync(p)) {
-        finalPdfPath = p;
-        break;
+    if (!force) {
+      for (const p of candidates) {
+        if (fs.existsSync(p)) {
+          finalPdfPath = p;
+          break;
+        }
       }
     }
 
     if (!finalPdfPath) {
       // 1. Try to recompile the PDF dynamically from the database record
-      const { searchParams } = new URL(request.url);
-      const assessmentId = searchParams.get("id");
-
       let assessment = null;
       if (assessmentId) {
         assessment = await prisma.assessment.findUnique({

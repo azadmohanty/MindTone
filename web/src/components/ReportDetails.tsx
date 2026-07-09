@@ -130,7 +130,7 @@ export default function ReportDetails({ assessment, hasAudio, audioUrl }: Report
     if (downloadingPdf) return;
     setDownloadingPdf(true);
     try {
-      const response = await fetch(`/api/assessment/pdf/${assessment.pdfReportName}?id=${assessment.id}`);
+      const response = await fetch(`/api/assessment/pdf/${assessment.pdfReportName}?id=${assessment.id}&force=true`);
       if (!response.ok) {
         throw new Error("Failed to download PDF report");
       }
